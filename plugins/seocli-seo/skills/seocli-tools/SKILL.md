@@ -64,6 +64,9 @@ results into findings and recommendations.
 
 - Check price and balance together at session start: `seocli:get_credit_balance` and
   `seocli:get_price_list` are both free. `[H]`
+- To rebill clients or answer "how much did I spend on X", read `summary[].charged` from
+  `seocli:list_credit_movements` for the period (free); never add up reservations, which include
+  open operations and refunded parts. `[H]`
 - When several paid calls are planned, show one line per call and one total, in credits.
 - Long operations: poll `seocli:get_operation` after 5 s, 10 s, 20 s, 30 s, then every 60 s, at most
   10 polls in a turn; then give the id, write it to `operations.md`, offer to check later. `[H]`

@@ -1,14 +1,14 @@
 {
-  "server": "seocli-api v0.4.0",
+  "server": "seocli-api v0.5.0",
   "available": [
     "get_status",
     "manage_clients",
     "get_credit_balance",
     "get_price_list",
+    "list_credit_movements",
     "get_operation"
   ],
   "planned": {
-    "list_credit_movements": "E2.5",
     "redeem_invite": "E2.6",
     "check_serp": "E3.1",
     "check_geo": "E3.2",

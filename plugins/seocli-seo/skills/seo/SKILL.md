@@ -40,7 +40,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 ## Cost
 
 - Free now: the site profile (web fetch of the client's public pages, 0 credits), the domain KB (Claude tokens only, `/seocli-seo:kb`), `seocli:get_status`, `seocli:manage_clients`, `seocli:get_credit_balance`,
-  `seocli:get_price_list`, `seocli:get_operation`. None of them spends credits.
+  `seocli:list_credit_movements`, `seocli:get_price_list`, `seocli:get_operation`. None of them spends credits.
 - Paid tools do not exist yet. When they do, follow `seocli-tools` rule 4-9 without exceptions:
   1. read the price list once per session;
   2. show the plan total as "Estimate: N credits (price list vN)" every time;

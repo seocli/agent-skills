@@ -1,10 +1,10 @@
 last_verified: 2026-10-02
 volatile: true
 
-# Tool map (server v0.4.0)
+# Tool map (server v0.5.0)
 
 The machine-readable copy is `tests/contract/tools.json` in the plugin repository; the lint keeps the
-two consistent with every file of the plugin. Status "now" means exposed by server v0.4.0.
+two consistent with every file of the plugin. Status "now" means exposed by server v0.5.0.
 
 ## Available now
 
@@ -13,6 +13,7 @@ two consistent with every file of the plugin. Status "now" means exposed by serv
 | `seocli:get_status` | none | free | Service name and version; session check. A `unauthorized` error means the account is pending or not logged in. |
 | `seocli:manage_clients` | `action`: create, list, get, rename, archive, restore, delete; `id`, `domain`, `name`, `status` (list filter) | free | Clients are the sites the account follows. `create` needs `domain` (name defaults to the domain); `get`, `rename`, `archive`, `restore`, `delete` need `id`. `delete` is irreversible. |
 | `seocli:get_credit_balance` | none | free | `included` (this period), `topup`, `total`. |
+| `seocli:list_credit_movements` | `from`, `to` (`YYYY-MM-DD`, UTC, inclusive; default: start of the current credit period to today), `client_id` (uuid or `none`), `limit` (1-500, default 100), `cursor` | free | Credit ledger, newest first: `movements[]` with `kind`, signed `credits` (balance change) and `amount`; `summary[]` per client with `charged` over the whole period; `next_cursor` until the last page. A reservation subtracts the estimate, a release returns the unused part, a confirmation records the charge in `amount` with 0 change. |
 | `seocli:get_price_list` | none | free | `version` and `items[]` with `operation` code, `description`, `unit`, `credits`. |
 | `seocli:get_operation` | `id` | free | `status` (queued, running, completed, partial, failed), `kind`, `client_id`, `cost`, `outcome`, timestamps. |
 
@@ -24,7 +25,6 @@ list; a code in the list does not mean the tool that uses it already exists.
 
 | Tool | Planned in | Capability in plain words |
 |---|---|---|
-| `seocli:list_credit_movements` | E2.5 | credit ledger per period and client |
 | `seocli:redeem_invite` | E2.6 | beta invite with free credits |
 | `seocli:check_serp` | E3.1 | search results check for a keyword |
 | `seocli:check_geo` | E3.2, E3.3 | presence in AI answers |
@@ -53,4 +53,4 @@ plainly when asked; do not accept pasted exports as a substitute data source in 
 
 ## Sources
 
-- seocli-api v0.4.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-02.
+- seocli-api v0.5.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-02.
