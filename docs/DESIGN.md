@@ -474,6 +474,23 @@ never automatic.
 
 ---
 
+### 5.10 Asking the user (product-owner rule)
+
+Every decision point is asked with Claude Code's `AskUserQuestion` tool, not as free text: 1-4
+questions per call, 2-4 options each, header up to 12 characters, `multiSelect` when several answers
+fit, "Other" added by the tool, recommended option first with "(Recommended)" and the consequence
+(credits, tokens, what is skipped) in its description. Decision points: client choice, scope or effort
+level, a paid call above `confirm_above_credits` (estimate in the option), `reused: true` (keep the
+existing result, recommended / relaunch with different parameters), `insufficient_credits` (reduce
+scope / continue without the paid part / stop), party mode (casting, mode quick/standard/fast, the
+final pick among the verdict's options: the user decides, the room never votes), question batteries
+(grouped in calls of at most 4), and "capability not available yet" (continue with what exists / stop).
+Only the lead asks. `AskUserQuestion` is not available in sub-agents (Agent SDK docs), so personas
+return `QUESTIONS` in the output contract and the lead converts them. Fallback when the tool is
+missing (claude.ai, non-interactive run): the same options as a short numbered list. Command skills
+list it in `allowed-tools` (grants without prompting; it does not restrict other tools); the lint
+requires the reference, the fallback and the `allowed-tools` entry.
+
 ## 6. Party mode protocol (`/seocli-seo:strategy`)
 
 ### 6.1 Purpose

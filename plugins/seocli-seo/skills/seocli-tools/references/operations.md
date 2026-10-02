@@ -23,7 +23,7 @@ the final amount. Until the operation completes, `charged` is not final. A launc
 
 ## Reuse and cache
 
-- `reused: true` with a `notice`: the same request in the last 10 minutes; nothing new is charged.
+- `reused: true` with a `notice`: the same request in the last 10 minutes; nothing new is charged. Ask with AskUserQuestion: keep the existing result (recommended) / relaunch with different parameters.
 - Cached results (planned for SERP and AI-answer checks): show the data date and the word "cache". The
   price is reduced when served from the cache (5% if another account paid, nothing if this account
   already did). Offer a forced refresh at full price only when freshness changes the decision.

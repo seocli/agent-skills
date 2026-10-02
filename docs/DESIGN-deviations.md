@@ -33,3 +33,8 @@ Recorded when the build departs from `docs/DESIGN.md`. Newest last.
 10. **Moderator and skeptic write nothing.** They return text and the lead writes `woven.md` and
     `verdict.md`, because persona tools are Read/Grep/Glob only.
 11. **`planned_commands`** now `audit`, `keywords`, `geo`, `report` (`page`, `ads-audit`, `strategy` ship).
+12. **AskUserQuestion everywhere (product-owner rule, section 5.10).** Not in the original design, which
+    allowed "AskUserQuestion or a numbered list". Now AskUserQuestion is the rule for every decision
+    point, with the numbered list only as fallback. `allowed-tools: AskUserQuestion` is added to the four
+    command skills; lint requires it plus the fallback. Personas cannot use the tool (not available in
+    sub-agents), so a pinned `ASK` sentence and a `QUESTIONS` field in the output contract were added.
