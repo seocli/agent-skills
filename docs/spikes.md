@@ -1,6 +1,10 @@
 # Spikes (DESIGN section 10, milestone M0)
 
-Status 2026-10-02: **not run**. A non-interactive nested session with `--permission-mode
+Status 2026-10-02: **passed in a real session**. The user ran `scripts/dev.sh --login --plugin-dir`
+with `/seocli-seo:seo` and `/seocli-seo:strategy` on etruria.fishing: personas, party mode, site
+profile and knowledge base work end to end. Not measured: T4 token figures and T3 resume cost.
+
+Original note: **not run**. A non-interactive nested session with `--permission-mode
 bypassPermissions` was refused by the harness of the build session, so the procedures are recorded
 for a human to run. T1 and T2 are dropped (personas carry no MCP tools). Run each from a scratch
 plugin outside the repository, with `claude -p --plugin-dir <scratch> --model haiku
