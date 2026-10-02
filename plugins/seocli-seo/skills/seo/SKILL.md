@@ -26,7 +26,10 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
    authenticate in the browser. If the server runs locally, the address comes from the environment
    variable `SEOCLI_MCP_URL` (default `http://127.0.0.1:8080/mcp`). Stop there.
 3. Call `seocli:get_status` once per session. An `unauthorized` error: relay the server's message
-   (the account is pending or the login is missing) and stop.
+   (the login is missing) and stop. If `seocli:get_credit_balance` shows `plan: pending`, the account
+   waits for activation: during the beta access is by invitation and the seocli team activates it;
+   say so, offer only free work (site profile, KB, methodology) and stop before any seocli tool beyond
+   status, balance and price list.
 4. Compare the live tool list with the tool map in the `seocli-tools` skill. Tools present today
    are usable. Anything planned and absent is "not available on your seocli server yet": say it in
    those words with the plain capability name, and never replace it with web search, memory or

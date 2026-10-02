@@ -9,7 +9,6 @@
     "get_operation"
   ],
   "planned": {
-    "redeem_invite": "E2.6",
     "check_serp": "E3.1",
     "check_geo": "E3.2",
     "get_visibility_history": "E3.4",

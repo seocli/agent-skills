@@ -400,7 +400,7 @@ Boundaries: stay in your remit (<one line>); missing data -> NEEDS; never estima
 ### 5.4 Hub `/seocli-seo:seo`
 
 1. Session check once: `seocli:get_status` (now). `unauthorized` -> relay the server's welcome text
-   (account pending; activation by invite, `seocli:redeem_invite` (E2.6), later subscription).
+   (login missing). `plan: pending` in `seocli:get_credit_balance` = account waiting for activation: in beta the seocli team activates invited agencies (server story 2.6, no invite code); later a subscription.
 2. Availability and credits: `seocli:get_credit_balance`, `seocli:get_price_list` (both free, now).
 3. Route by intent: site audit -> `audit`; a page in this repo -> `page`; keywords, briefs,
    clusters -> `keywords`; AI answers -> `geo`; paid campaigns -> `ads-audit`; a decision or trade-off

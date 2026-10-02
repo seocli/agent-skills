@@ -5,8 +5,9 @@ volatile: true
 
 ## Background operations
 
-Long or paid work becomes an operation. A launching tool returns its `operation_id`, a `status`
-and `reused`. The final result is read with `seocli:get_operation`.
+Long or paid work becomes an operation. A launching tool returns its `operation_id`, a `status`,
+`reused` and `balance` (`included`, `topup`, `total` right after the reservation, or the current
+balance when reused): show the remaining credits without calling `seocli:get_credit_balance` again. The final result is read with `seocli:get_operation`.
 
 - Statuses: `queued`, `running`, `completed`, `partial`, `failed`.
 - `partial`: present what exists, with the reason, and list the rest under NOT ASSESSED. The charge is proportional.
