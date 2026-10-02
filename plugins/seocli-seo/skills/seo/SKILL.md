@@ -65,13 +65,13 @@ do, offering the capabilities listed under Steps.
 |---|---|---|
 | connection, account, balance, prices, clients, operation status | do it here | - |
 | a site-wide audit | not available yet (`/seocli-seo:audit`, needs the crawl tools) | after the audit milestone |
-| one page in this repository | not available yet (`/seocli-seo:page`) | local review first, full check later |
+| one page in this repository | local review of files you point at (`/seocli-seo:page`), no credits | server HTML check (`seocli:check_page_html` (E6.7)) |
 | keywords, briefs, clusters | not available yet (`/seocli-seo:keywords`, `seocli:research_keywords` (E5.1)) | after the keyword milestone |
 | AI answers, SERP checks | not available yet (`/seocli-seo:geo`, `seocli:check_serp` (E3.1), `seocli:check_geo` (E3.2)) | after the SERP and GEO milestone |
 | Search Console or GA4 | not available yet (`seocli:get_search_console_data` (E7.4), `seocli:get_analytics_data` (E7.5)) | after the Google data milestone |
 | what changed lately | not available yet (`seocli:get_summary` (E4.3)) | after the monitors milestone |
-| paid campaigns audit | no data tool exists; general method guidance only (`/seocli-seo:ads-audit`) | a later server epic |
-| a decision or trade-off | not available yet (`/seocli-seo:strategy`, started by the user) | with the personas release |
+| paid campaigns audit | checklist and questions only (`/seocli-seo:ads-audit`), no account data | a later server epic |
+| a decision or trade-off | `/seocli-seo:strategy`, started by the user; works on facts you give and free data, 0 credits | richer packs as tools arrive |
 | branded client report | not available yet (`/seocli-seo:report`, `seocli:get_report_data` (E8.2)) | after the report milestone |
 
    For a request outside the first row, answer with general methodology (`methodology` skill) where
@@ -85,7 +85,10 @@ do, offering the capabilities listed under Steps.
 | multi-lens audit | pack + 2-4 specialists in parallel + a skeptic pass | 80-200k |
 | decision, trade-off, plan | strategy round-table, started by the human | 250-450k |
 
-   Only the first row is available in this version; say so if a request needs more.
+   Rows 1, 2 and 4 work today on local files, facts the user gives and free tools; a lens that needs
+   a tool not yet available lists it under NEEDS. For "ask the <persona>": spawn that one persona with the
+   brief Objective, Pack (absolute path), Read also, Output (methodology contract, 400 words), Boundaries
+   (own remit; missing data to NEEDS), and relay its answer under its label.
 7. **Workspace.** The first time you need to write a file, create the folder named by the plugin
    option `workspace_dir` (default `seo-workspace`) in the project, with a `.gitignore` containing
    exactly `*`, because it holds client data. Do this before writing anything into it. Layout in
