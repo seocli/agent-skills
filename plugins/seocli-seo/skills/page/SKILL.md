@@ -31,6 +31,8 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
    `command -v lighthouse` or `npx --no-install lighthouse --version`. Never install it, never run it
    against a remote address, never call PageSpeed or any other remote service. Not installed: say so and
    review speed from the code (render-blocking resources, image sizes, fonts, script weight) without numbers.
+   Heavy images: once `seocli:compress_images` (planned, E6.10) is in tools/list, offer it (1 credit per 10
+   images, estimate and confirmation first); until then list the images to optimise and stop there.
 4. Never replace a missing capability with web search, memory or invented figures.
 
 ## Cost

@@ -35,7 +35,13 @@
     "get_report_data": "E8.2",
     "set_billing_details": "E9.1",
     "buy_credits": "E9.4",
-    "list_invoices": "E9.5"
+    "list_invoices": "E9.5",
+    "compress_images": "E6.10"
   },
-  "planned_commands": ["audit", "keywords", "geo", "report"]
+  "planned_commands": [
+    "audit",
+    "keywords",
+    "geo",
+    "report"
+  ]
 }
