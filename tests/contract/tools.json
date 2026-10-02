@@ -1,0 +1,41 @@
+{
+  "server": "seocli-api v0.4.0",
+  "available": [
+    "get_status",
+    "manage_clients",
+    "get_credit_balance",
+    "get_price_list",
+    "get_operation"
+  ],
+  "planned": {
+    "list_credit_movements": "E2.5",
+    "redeem_invite": "E2.6",
+    "check_serp": "E3.1",
+    "check_geo": "E3.2",
+    "get_visibility_history": "E3.4",
+    "delete_account": "E3.5",
+    "manage_monitors": "E4.1",
+    "get_summary": "E4.3",
+    "research_keywords": "E5.1",
+    "select_keywords": "E5.2",
+    "find_competitors": "E5.3",
+    "compare_competitor": "E5.3",
+    "crawl_site": "E6.1",
+    "get_audit_issues": "E6.3",
+    "check_performance": "E6.5",
+    "recheck_urls": "E6.6",
+    "check_page_html": "E6.7",
+    "manage_google": "E7.1",
+    "get_search_console_data": "E7.4",
+    "find_cannibalization": "E7.4",
+    "inspect_indexing": "E7.4",
+    "get_analytics_data": "E7.5",
+    "create_baseline": "E7.7",
+    "manage_branding": "E8.1",
+    "get_report_data": "E8.2",
+    "set_billing_details": "E9.1",
+    "buy_credits": "E9.4",
+    "list_invoices": "E9.5"
+  },
+  "planned_commands": ["audit", "page", "keywords", "geo", "ads-audit", "report", "strategy"]
+}

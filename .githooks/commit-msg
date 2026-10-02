@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# commit-msg: Conventional Commits + nessuna attribuzione a Claude.
+set -euo pipefail
+
+body="$(grep -v '^#' "$1" || true)"
+subject="$(head -n1 <<<"$body")"
+
+if grep -Eiq '^(co-authored-by:.*(claude|anthropic)|claude-session:)|generated with \[?claude|claude\.ai/code/session_' <<<"$body"; then
+  echo "[commit-msg] attribution to Claude is forbidden in commit messages" >&2
+  exit 1
+fi
+
+if grep -Eq '^(Merge|Revert|fixup!|squash!) ' <<<"$subject"; then
+  exit 0
+fi
+
+if ! grep -Eq '^(feat|fix|docs|style|refactor|perf|test|build|chore|revert)(\([a-z0-9._/-]+\))?!?: .+' <<<"$subject"; then
+  echo "[commit-msg] format: <type>(<scope>)?: <description>" >&2
+  exit 1
+fi

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# pre-commit: lint del plugin (nessuna dipendenza oltre Node).
+set -euo pipefail
+exec node "$(git rev-parse --show-toplevel)/tests/lint.mjs"

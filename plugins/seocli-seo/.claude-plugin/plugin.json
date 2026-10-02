@@ -1,0 +1,24 @@
+{
+  "name": "seocli-seo",
+  "version": "0.3.0",
+  "description": "Specialist SEO, GEO and paid-media personas with a falsifiable 4-phase methodology and a strategy round-table, powered by the seocli MCP server.",
+  "license": "MIT",
+  "homepage": "https://github.com/seocli/agent-skills",
+  "author": { "name": "seocli", "url": "https://github.com/seocli" },
+  "keywords": ["seo", "geo", "google-ads", "meta-ads", "mcp", "subagents"],
+  "userConfig": {
+    "confirm_above_credits": {
+      "type": "number",
+      "default": 500,
+      "min": 0,
+      "title": "Confirm plans above (credits)",
+      "description": "The estimate is always shown; above this total an explicit yes is required."
+    },
+    "workspace_dir": {
+      "type": "string",
+      "default": "seo-workspace",
+      "title": "Workspace folder",
+      "description": "Evidence packs, party rounds and decisions (holds client data, gitignored)."
+    }
+  }
+}
