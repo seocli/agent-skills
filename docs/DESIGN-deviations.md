@@ -16,3 +16,20 @@ Recorded when the build departs from `docs/DESIGN.md`. Newest last.
    MCP; until the server answers with a static development token, `tools.json` is maintained by hand.
 5. **Knowledge-skill section "Claim tags".** `methodology` defines the claim tags in its own section
    rather than under `## Rules`, because lint check 10 forbids the `[U]` tag inside `## Rules`.
+6. **`ads-audit` without user-supplied exports (D3).** The hub already rules out pasted exports, so
+   `ads-audit` is checklist-and-questions only: the user states answers from the platform screens, they
+   are recorded as `user_supplied` qualitative facts and never summed or scored. No euro weighting
+   unless the user states the amounts.
+7. **Persona and lint additions.** `tests/lint.mjs` now also checks that the 11 expected agent files
+   exist, that `model` is opus/sonnet/haiku, that `maxTurns` is numeric, and that backticked
+   persona-like names (`*-analyst`, `*-developer`, `*-strategist`, `*-manager`) refer to an existing
+   agent or skill (the "agent name that does not exist" part of 9.1 #7).
+8. **`strategy` reference files.** Four files (`casting`, `schemas`, `weaving`, `verdict`) instead of the
+   design's `protocol`; the protocol itself is the Steps section of `SKILL.md`, the round schemas and
+   the dispatch brief are in `schemas.md`.
+9. **`page` Lighthouse invocation.** Design 5.6 runs `npx lighthouse`; the build uses only a Lighthouse
+   the user already installed (`command -v lighthouse` or `npx --no-install`), so `npx` never downloads
+   anything, and only against localhost.
+10. **Moderator and skeptic write nothing.** They return text and the lead writes `woven.md` and
+    `verdict.md`, because persona tools are Read/Grep/Glob only.
+11. **`planned_commands`** now `audit`, `keywords`, `geo`, `report` (`page`, `ads-audit`, `strategy` ship).

@@ -40,6 +40,12 @@ const KILL = [
   /Indexing API for ordinary pages/i, /Flesch/i, /optimization score as (a )?KPI/i,
 ];
 
+const AGENTS = [
+  'moderator', 'skeptic', 'pragmatist', 'marketing-strategist', 'seo-analyst', 'seo-developer',
+  'content-strategist', 'geo-analyst', 'geo-developer', 'google-ads-manager', 'meta-ads-manager',
+];
+const MODELS = ['opus', 'sonnet', 'haiku'];
+
 const read = (f) => readFileSync(f, 'utf8');
 const norm = (s) => s.replace(/\s+/g, ' ');
 const lines = (s) => s.replace(/\n$/, '').split('\n').length;
@@ -125,6 +131,8 @@ const register = (file, kind) => {
 agentFiles.forEach((f) => register(f, 'agent'));
 skillFiles.forEach((f) => register(f, KNOWLEDGE.includes(basename(dirname(f))) ? 'knowledge' : 'command'));
 
+for (const a of AGENTS) if (!agentNames.has(a)) err(join(PLUGIN, 'agents', `${a}.md`), 'persona agent file missing');
+
 // 2-6 per kind
 for (const [file, { kind, fm, body, text }] of info) {
   const n = lines(text);
@@ -144,6 +152,8 @@ for (const [file, { kind, fm, body, text }] of info) {
     const tools = String(fm.tools ?? '').split(',').map((t) => t.trim()).filter(Boolean);
     const bad = tools.filter((t) => !['Read', 'Grep', 'Glob'].includes(t));
     if (bad.length || !tools.length) err(file, `tools must be exactly a subset of Read, Grep, Glob (found: ${bad.join(', ') || 'none'})`);
+    if (!MODELS.includes(fm.model)) err(file, `model must be one of ${MODELS.join(', ')}`);
+    if (!/^\d+$/.test(String(fm.maxTurns ?? ''))) err(file, 'maxTurns must be a number');
     for (const [k, s] of Object.entries(PINNED)) if (!norm(text).includes(s)) err(file, `pinned sentence ${k} missing or altered`);
   }
   // preloads
@@ -179,6 +189,10 @@ for (const f of mdFiles) {
   }
   for (const m of t.matchAll(/\$\{CLAUDE_PLUGIN_ROOT\}\/([\w./-]+)/g)) {
     if (!existsSync(join(PLUGIN, m[1].replace(/[.,;)]+$/, '')))) err(f, `dead path ${m[0]}`);
+  }
+  // persona-like names (backticked) must be an existing agent or skill
+  for (const m of t.matchAll(/`([a-z]+(?:-[a-z]+)*-(?:analyst|developer|strategist|manager))`/g)) {
+    if (!agentNames.has(m[1]) && !skillNames.has(m[1])) err(f, `dead agent reference ${m[1]}`);
   }
   for (const m of t.matchAll(/\/seocli-seo:([a-z][a-z-]*)/g)) {
     if (skillNames.has(m[1])) { if (plannedCmds.has(m[1])) err(f, `"${m[1]}" exists but is still in planned_commands`); }

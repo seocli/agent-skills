@@ -37,5 +37,5 @@
     "buy_credits": "E9.4",
     "list_invoices": "E9.5"
   },
-  "planned_commands": ["audit", "page", "keywords", "geo", "ads-audit", "report", "strategy"]
+  "planned_commands": ["audit", "keywords", "geo", "report"]
 }
