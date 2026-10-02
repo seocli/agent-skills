@@ -38,11 +38,19 @@ plugin uses a local server on port 8080. The production address will become the 
 
 ## Planned personas
 
-Eleven specialists, each in an isolated context with a narrow remit and read-only tools: moderator,
+Twelve specialists, each in an isolated context with a narrow remit (read-only tools, except the domain researcher): moderator,
 skeptic, pragmatist, marketing-strategist, seo-analyst, seo-developer, content-strategist,
-geo-analyst, geo-developer, google-ads-manager, meta-ads-manager. Only the lead calls seocli tools;
+geo-analyst, geo-developer, google-ads-manager, meta-ads-manager, domain-researcher. Only the lead calls seocli tools;
 personas read an evidence pack and return findings and recommendations with an output contract. The
 design is in `docs/DESIGN.md`.
+
+## Domain knowledge base
+
+`/seocli-seo:kb build|update|show|list [sector]` researches the public web about your client's sector
+(glossary, entities, calendar, regulations, audience questions, sources, topic map) and catalogues it in
+your home directory at `~/.seocli/kb/<sector-slug>/`, shared by all projects and usable offline. It holds
+sector knowledge only, never client data, costs 0 seocli credits (Claude tokens only; quick about 10
+sources, deep about 30) and may ask permission to write outside the project.
 
 ## Credits and costs
 

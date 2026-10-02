@@ -36,6 +36,9 @@ primary source (id in `references/sources.md`); `[A]` plugin convention.
    the user asks. Ask once before overwriting a profile the user edited. [A]
 9. **Where.** Write `<workspace_dir>/<client or domain>/site-profile.md` (workspace rules in `seocli-tools`).
    Personas read it with Read only; they never fetch. [A]
+10. **Sector slug.** Add a `Sector (KB slug)` row to the profile (for example `fishing`, kebab-case English,
+    see `domain-kb`), `inferred` from the offerings. The KB is sector knowledge shared across clients; the
+    profile itself never goes into it. [A]
 
 ## Heuristics
 

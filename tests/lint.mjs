@@ -15,7 +15,7 @@ const warn = (file, msg) => warnings.push(`${relative(REPO, file)}: ${msg}`);
 
 const KNOWLEDGE = [
   'methodology', 'seocli-tools', 'technical-seo', 'search-analytics', 'content-quality',
-  'local-seo', 'geo-visibility', 'google-ads', 'meta-ads', 'marketing-strategy', 'site-profile',
+  'local-seo', 'geo-visibility', 'google-ads', 'meta-ads', 'marketing-strategy', 'site-profile', 'domain-kb',
 ];
 const LIMITS = { agent: 120, command: 200, knowledge: 250, reference: 200 };
 const PRELOAD_MAX_SKILLS = 3;
@@ -43,8 +43,10 @@ const KILL = [
 
 const AGENTS = [
   'moderator', 'skeptic', 'pragmatist', 'marketing-strategist', 'seo-analyst', 'seo-developer',
-  'content-strategist', 'geo-analyst', 'geo-developer', 'google-ads-manager', 'meta-ads-manager',
+  'content-strategist', 'geo-analyst', 'geo-developer', 'google-ads-manager', 'meta-ads-manager', 'domain-researcher',
 ];
+// Personas allowed more than Read, Grep, Glob (DESIGN-deviations 14).
+const EXTRA_TOOLS = { 'domain-researcher': ['WebSearch', 'WebFetch', 'Write'] };
 const MODELS = ['opus', 'sonnet', 'haiku'];
 
 const read = (f) => readFileSync(f, 'utf8');
@@ -132,6 +134,7 @@ const register = (file, kind) => {
 agentFiles.forEach((f) => register(f, 'agent'));
 skillFiles.forEach((f) => register(f, KNOWLEDGE.includes(basename(dirname(f))) ? 'knowledge' : 'command'));
 
+if (agentNames.size !== AGENTS.length) err(join(PLUGIN, 'agents'), `${agentNames.size} agents, expected ${AGENTS.length} (12 personas)`);
 for (const a of AGENTS) if (!agentNames.has(a)) err(join(PLUGIN, 'agents', `${a}.md`), 'persona agent file missing');
 
 // 2-6 per kind
@@ -154,11 +157,13 @@ for (const [file, { kind, fm, body, text }] of info) {
     if (!/numbered list/i.test(text)) err(file, 'command skill must describe the numbered-list fallback');
     if (!/AskUserQuestion/.test(String(fm['allowed-tools'] ?? ''))) err(file, 'command skill must list AskUserQuestion in allowed-tools');
     if (!/\bWebFetch\b/.test(String(fm['allowed-tools'] ?? ''))) err(file, 'command skill must list WebFetch in allowed-tools');
+    if (text.includes('.seocli/kb') && !text.includes('domain-kb')) err(file, 'command skill that uses the KB must reference domain-kb');
     if (!text.includes('site-profile')) err(file, 'command skill must reference the site-profile step');
   }
   if (kind === 'agent') {
     const tools = String(fm.tools ?? '').split(',').map((t) => t.trim()).filter(Boolean);
-    const bad = tools.filter((t) => !['Read', 'Grep', 'Glob'].includes(t));
+    const allowed = ['Read', 'Grep', 'Glob', ...(EXTRA_TOOLS[fm.name] ?? [])];
+    const bad = tools.filter((t) => !allowed.includes(t));
     if (bad.length || !tools.length) err(file, `tools must be exactly a subset of Read, Grep, Glob (found: ${bad.join(', ') || 'none'})`);
     if (!MODELS.includes(fm.model)) err(file, `model must be one of ${MODELS.join(', ')}`);
     if (!/^\d+$/.test(String(fm.maxTurns ?? ''))) err(file, 'maxTurns must be a number');

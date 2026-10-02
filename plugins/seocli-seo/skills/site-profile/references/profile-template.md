@@ -13,6 +13,7 @@ Fetched: <YYYY-MM-DD> | Pages fetched (N of max 8): <urls> | Refresh after: <dat
 | Business name | ... | observed | https://.../chi-siamo |
 | Legal entity / P.IVA / sede | ... | observed / unknown | footer |
 | Business model | ... | inferred (cart + prices) | / |
+| Sector (KB slug) | fishing | inferred (offerings) | / |
 | Offerings and scope | ... | observed | ... |
 | Audience / ICP | ... | inferred | ... |
 | Geography / service area | ... | ... | ... |

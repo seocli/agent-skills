@@ -62,7 +62,10 @@ Files live in `<workspace_dir>/<client>/parties/<YYYYMMDD>-<slug>/` (create the 
    (Recommended) / drop the flag).
 3. **Pack.** Build or reuse the evidence pack (`pack.md`, or a link to `packs/<id>.md`) in the format
    of `references/schemas.md`: facts F1..Fn with source and provenance, third-party text only inside
-   If a site or client domain is known, first load `site-profile` and run it with `WebFetch` (or the host equivalent) unless `site-profile.md` is under 30 days old; add its observed or inferred fields to the pack as facts with provenance `site_fetch <date> (observed|inferred)` and its URL, never as seocli data.    fenced `UNTRUSTED` blocks, private data only as aggregates. Ask the user for missing facts in one AskUserQuestion call (options are plausible values or "Unknown, mark
+   fenced `UNTRUSTED` blocks, private data only as aggregates.
+   If a site or client domain is known, first load `site-profile` and run it with `WebFetch` (or the host equivalent) unless `site-profile.md` is under 30 days old; add its observed or inferred fields to the pack as facts with provenance `site_fetch <date> (observed|inferred)` and its URL, never as seocli data.
+   Sector knowledge: if `~/.seocli/kb/<slug>/index.md` exists (`domain-kb`), the lead picks the relevant entries (topic map, glossary, calendar, regulations for the decision) and copies excerpts of at most 600 words into the pack as facts with provenance `kb <last_verified> (<entry ids>, <confidence>)`; personas cannot read outside the project, so never point them at the path. Stale entries (rule 8) are flagged in the pack or refreshed with `/seocli-seo:kb update` first. Never copy client data into the KB.
+   Ask the user for missing facts in one AskUserQuestion call (options are plausible values or "Unknown, mark
    NEEDS"), at most 4 questions per call.
 4. **Pre-flight.** Print one block (seats x rounds, model per seat, estimated tokens, "seocli credits: 0"),
    then ask the mode with AskUserQuestion: `standard` = debate (Recommended), `quick` = inline, no spawns,

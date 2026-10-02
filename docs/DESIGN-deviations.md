@@ -45,3 +45,11 @@ Recorded when the build departs from `docs/DESIGN.md`. Newest last.
     metrics and does not replace seocli data. New knowledge skill `site-profile`; `WebFetch` added to
     `allowed-tools` of the four command skills (Claude Code documents that field as a pre-approval, not a
     restriction); personas keep `tools: Read, Grep, Glob`. Lint now requires both on command skills.
+14. **Domain knowledge base (product-owner rule, section 5.12).** New persona `domain-researcher` with
+    `tools: WebSearch, WebFetch, Read, Grep, Glob, Write`, against the Read/Grep/Glob rule of 3.1 (lint
+    allows exactly these extra tools for this one persona). It writes outside the project, to
+    `~/.seocli/kb/<sector-slug>/` (user level, shared across projects), limited only by its Boundaries text.
+    Claude Code documents that sub-agents can use WebSearch, WebFetch and Write, that plugin sub-agents ignore
+    `hooks`, `mcpServers` and `permissionMode`, and that background sub-agents surface permission prompts in
+    the main session: expect prompts for writes outside the project, and the path cannot be enforced by the
+    plugin. New knowledge skill `domain-kb` and command `kb`; the persona count is now 12.

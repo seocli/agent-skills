@@ -39,7 +39,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 
 ## Cost
 
-- Free now: the site profile (web fetch of the client's public pages, 0 credits), `seocli:get_status`, `seocli:manage_clients`, `seocli:get_credit_balance`,
+- Free now: the site profile (web fetch of the client's public pages, 0 credits), the domain KB (Claude tokens only, `/seocli-seo:kb`), `seocli:get_status`, `seocli:manage_clients`, `seocli:get_credit_balance`,
   `seocli:get_price_list`, `seocli:get_operation`. None of them spends credits.
 - Paid tools do not exist yet. When they do, follow `seocli-tools` rule 4-9 without exceptions:
   1. read the price list once per session;
@@ -54,6 +54,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 ## Steps
 
 1. **Site profile.** If a site URL or domain is in the request, or becomes known from the selected client (step 4), do not ask what the business is: load `site-profile` and run its procedure with the host web-fetch tool (`WebFetch` in Claude Code), free and before planning or any paid call. Ask only the `unknown` fields (AskUserQuestion). No fetch tool in the host: ask for a short description. The profile goes to `<client or domain>/site-profile.md`; reuse it if younger than 30 days. Create the workspace first (step 9, `.gitignore` included).
+   **Domain KB.** Once the business is known, load `domain-kb` and map it to a sector slug (for example fishing for a fishing shop). Check `~/.seocli/kb/<slug>/index.md`: present and fresh (no volatile entry older than 60 days, stable older than 180): use it silently. Missing or stale: before any analysis ask with AskUserQuestion: "Use the existing KB" (only if present) / "Build quick, ~10 sources, 80-150k tokens (Recommended when missing)" / "Build deep, ~30 sources, 250-450k tokens" / "Skip" (continue without sector knowledge, say so). Building is `/seocli-seo:kb`; 0 seocli credits. When using the KB, read `index.md` and only the needed files, and pass excerpts to personas through the pack (they cannot read `~/.seocli`). Never put client data into the KB.
 2. **Session check.** Run the Availability steps. Report in one line: server reachable, N tools
    available, account state.
 3. **Credits.** Call `seocli:get_credit_balance` and `seocli:get_price_list` (both free). Show the
@@ -82,6 +83,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 | Search Console or GA4 | not available yet (`seocli:get_search_console_data` (E7.4), `seocli:get_analytics_data` (E7.5)) | after the Google data milestone |
 | what changed lately | not available yet (`seocli:get_summary` (E4.3)) | after the monitors milestone |
 | paid campaigns audit | checklist and questions only (`/seocli-seo:ads-audit`), no account data | a later server epic |
+| sector knowledge (glossary, regulations, calendar, audience questions) | `/seocli-seo:kb build|update|show|list`, 0 credits | richer topic maps for briefs |
 | a decision or trade-off | `/seocli-seo:strategy`, started by the user; works on facts you give and free data, 0 credits | richer packs as tools arrive |
 | branded client report | not available yet (`/seocli-seo:report`, `seocli:get_report_data` (E8.2)) | after the report milestone |
 

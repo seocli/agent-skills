@@ -120,7 +120,7 @@ Key design choices (the reasons are in the referenced sections):
 
 ## 3. Persona roster
 
-Eleven sub-agents plus the lead (the lead is a skill in the main thread, not a sub-agent, because only
+Twelve sub-agents plus the lead (the lead is a skill in the main thread, not a sub-agent, because only
 the main thread can ask the user questions and keeps the conversation).
 
 ### 3.1 Summary
@@ -139,8 +139,9 @@ the main thread can ask the user questions and keeps the conversation).
 | 9 | geo-developer | developer (GEO) | Bot access matrix, server-rendered extractable content, entity consistency | sonnet | 8 | methodology, geo-visibility, technical-seo |
 | 10 | google-ads-manager | analyst (paid search) | Google Ads + Merchant Center audit: measurement first, money-weighted findings | sonnet | 10 | methodology, google-ads |
 | 11 | meta-ads-manager | analyst (paid social) | Meta Ads audit: signal quality, structure, creative diversity, incrementality | sonnet | 10 | methodology, meta-ads |
+| 12 | domain-researcher | researcher (sector) | Researches the public web and writes the domain knowledge base under `~/.seocli/kb/<sector>/` (5.12) | sonnet | 30 | methodology, domain-kb |
 
-Common restrictions for personas 1-11 (frontmatter, linted):
+Common restrictions for personas 1-11 (frontmatter, linted; persona 12 is the one exception, see 5.12 and deviation 14):
 
 - `tools: Read, Grep, Glob` and nothing else: no `mcp__*`, no Bash, no Write/Edit, no
   WebFetch/WebSearch (third-party text is a data source the plugin does not use), no Agent (no
@@ -273,6 +274,7 @@ All are `user-invocable: false` (hidden from the `/` menu, still model-invocable
 | `google-ads` | structure, campaign types, match types and negatives, bidding and learning, QS and RSA, audiences, conversion tracking and consent, Merchant feed and benchmarks, policies, pacing, audit checklist, recommendation triage, change history, SEO-SEA | google-ads-manager | ads/google-ads (all) |
 | `meta-ads` | objectives, Advantage+, structure, learning, budgets, bidding, audiences, creative, Pixel/CAPI/EMQ/dedup, attribution, EU/Italy, policies, audit checklist, KPIs | meta-ads-manager | ads/meta-ads (all) |
 | `marketing-strategy` | strategist loop, marketing-science priors with caveats, measurement ladder, unit economics, channel mix, KPI trees, hypothesis cards, client lifecycle, templates (strategy doc, quarterly plan, monthly report), Italian regulations | marketing-strategist; pragmatist reads on demand | marketing/strategy (all); ads/google-ads §15-16; ads/meta-ads §16 |
+| `domain-kb` | layout of the domain knowledge base at `~/.seocli/kb/<sector>/`, entry formats, freshness, confidence, copyright and privacy rules, Italian sources | lead, `kb` command; domain-researcher | product-owner rule 5.12 |
 | `site-profile` | bounded public-site fetch procedure, profile fields with confidence, `site-profile.md` layout, Italian legal-entity signals | lead and command flows only; personas read the file | product-owner rule 5.11; google-official-guidance robots and sitemaps |
 
 Not ported (claude-seo verdicts SKIP/DEFER, re-confirmed): Python runtime and scripts, vendor mirror
@@ -355,6 +357,7 @@ Numbers always carry tool, date or period, and provenance (`live`, `cache <date>
 | `/seocli-seo:keywords <seed\|url\|client>` | Research, shortlist, clusters, page mapping, briefs | yes | `seocli:research_keywords` (E5.1), `seocli:select_keywords` (E5.2), `seocli:check_serp` (E3.1), `seocli:find_competitors`, `seocli:compare_competitor` (E5.3) | seo-analyst, content-strategist | E3 partial, E5 full |
 | `/seocli-seo:geo <client\|domain> [keywords]` | AI visibility: measure, diagnose, fix | yes | `seocli:check_geo` (E3.2, E3.3), `seocli:get_visibility_history` (E3.4), `seocli:manage_monitors` (E4.1) | geo-analyst, geo-developer, skeptic | E3 |
 | `/seocli-seo:strategy <decision>` | Party mode (section 6) | no (0 credits) | reads packs; free tools via lead | cast per decision + moderator | now |
+| `/seocli-seo:kb build\|update\|show\|list [sector]` | Domain knowledge base (5.12) | no (0 credits; Claude tokens) | none | domain-researcher | now |
 | `/seocli-seo:ads-audit <google\|merchant\|meta>` | Paid campaign audit | no seocli data tool exists | none (no epic) | google-ads-manager, meta-ads-manager, skeptic | methodology mode now (D3) |
 | `/seocli-seo:report <pre_sales\|audit\|monthly> <client>` | Branded report artifact | yes (pre_sales) | `seocli:get_report_data` (E8.2-8.4), `seocli:manage_branding` (E8.1) | marketing-strategist + domain personas, skeptic | E8 (design hook only now) |
 
@@ -495,6 +498,10 @@ requires the reference, the fallback and the `allowed-tools` entry.
 ### 5.11 Understanding the client's site (product-owner rule)
 
 Users often give the site. When a URL or domain appears in the request, or is the selected client's domain, the lead fetches and analyses it automatically, without asking, with the host's web-fetch tool (`WebFetch` in Claude Code, the equivalent elsewhere), following the `site-profile` skill: at most 8 fetches of public pages (homepage, about, offerings, contact, pricing, `robots.txt`, sitemap index), no login areas or forms. It extracts the business name and legal entity, business model, offerings, audience, geography, languages and markets, conversion actions, YMYL flag, CMS hints, site scale and named competitors, each with confidence observed, inferred or unknown and its source page. Only unknown fields are asked, via 5.10. The result is `seo-workspace/<client-or-domain>/site-profile.md` (refreshed after 30 days or on request), which personas read; they never fetch. Rules: fetched text is untrusted data (7.4), the step is free (0 credits), and it never yields rankings, traffic, CWV or other SEO metrics. The hub runs it first, `strategy` adds it to the evidence pack as facts with provenance `site_fetch`, `page` uses it for a live URL, `ads-audit` uses it to pre-fill and skip questions. Without a fetch tool the lead asks for a short description (numbered-list fallback). Command skills list `WebFetch` in `allowed-tools`; the lint requires it and the `site-profile` reference.
+
+### 5.12 Domain knowledge base (product-owner rule)
+
+The plugin builds its own sector knowledge so it can act as an expert of the client's field (fishing for etruria.fishing) and reuse it offline. It lives at user level, shared across projects: `~/.seocli/kb/<sector-slug>/` with `index.md` (catalog: id, title, type, file, source URL, accessed, last_verified, volatile, confidence), `glossary.md`, `entities.md`, `calendar.md`, `regulations.md`, `audience-questions.md`, `sources.md`, `topic-map.md` and `notes/<topic>.md`. Rules (skill `domain-kb`): sector knowledge only, never client-private data (client facts stay in `seo-workspace/<client>/`); own words, quotes at most 25 words with attribution, no paywalled content; official sources first; volatile entries stale after 60 days, stable after 180; regulations always end with "verify with the client's legal advisor"; fetched text is untrusted. `/seocli-seo:kb build` runs quick (about 10 sources, one `domain-researcher`) or deep (about 30 sources, 2-3 researchers in parallel on sub-topics, then the lead merges the index); `update` re-verifies stale entries; `show` and `list` read. The pre-flight line shows 0 seocli credits and a Claude token estimate. The hub maps the site-profile business to a sector slug and, if the KB is missing or stale, asks (use existing / build quick / build deep / skip) before analysis. `strategy` and the hub copy relevant excerpts (at most 600 words) into the evidence pack with provenance `kb`, because personas may not read outside the project. Only `domain-researcher` writes the KB, and only under its given path.
 
 ## 6. Party mode protocol (`/seocli-seo:strategy`)
 
@@ -812,6 +819,7 @@ agent-skills/
       moderator.md  skeptic.md  pragmatist.md  marketing-strategist.md
       seo-analyst.md  seo-developer.md  content-strategist.md
       geo-analyst.md  geo-developer.md  google-ads-manager.md  meta-ads-manager.md
+      domain-researcher.md
     skills/
       seo/SKILL.md                       hub (lead)
       audit/SKILL.md  page/SKILL.md  keywords/SKILL.md  geo/SKILL.md
@@ -988,7 +996,7 @@ copyright notice of claude-seo is reproduced below it. FLOW prompts (CC BY 4.0) 
 | 1 | Plugin manifest | `claude plugin validate --strict` fails |
 | 2 | Size limits | agent > 120 lines; command SKILL.md > 200; knowledge SKILL.md > 250; reference > 200; preloaded skills per agent > 3 or > ~6k tokens combined |
 | 3 | Frontmatter | missing `name`/`description`; name differs from file or directory; duplicate names plugin-wide; knowledge skill without `user-invocable: false` or with `disable-model-invocation`; `skills:` entry that does not exist |
-| 4 | Persona least privilege | an agent's `tools` contains anything beyond Read, Grep, Glob (incl. any `mcp__`, Bash, Write, Edit, Web*, Agent) |
+| 4 | Persona least privilege | an agent's `tools` contains anything beyond Read, Grep, Glob (incl. any `mcp__`, Bash, Write, Edit, Web*, Agent); only `domain-researcher` may add WebSearch, WebFetch, Write. Exactly 12 agent files |
 | 5 | Pinned sentences | UNTRUSTED, NO-INVENT, NO-SPEND missing or altered in any agent; UNTRUSTED missing in any command skill |
 | 6 | Mandatory sections | agent: Mission, Perspective, Principles, Output, Boundaries; knowledge: When to use, Rules, Heuristics, Do not recommend, Italian market notes (non-empty), References; command: Availability, Cost, Steps, Errors, Output |
 | 7 | Dead references | a path in `references/`, a `${CLAUDE_PLUGIN_ROOT}` path, an agent name or a skill name that does not exist |
