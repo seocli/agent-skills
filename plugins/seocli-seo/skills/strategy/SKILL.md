@@ -3,7 +3,7 @@ name: strategy
 description: Strategy round-table (party mode). Specialist personas form independent views on one decision from the same evidence pack, cross-examine each other, and a moderator drafts a falsifiable decision record for the user to accept. Use for party mode, a round-table, "what should we do first", channel-mix or budget-split decisions. Uses no seocli credits.
 argument-hint: "<decision> [--seats a,b,c] [--rounds 2|3] [--quick] [--fast] [--team]"
 disable-model-invocation: true
-allowed-tools: AskUserQuestion
+allowed-tools: AskUserQuestion, WebFetch
 ---
 
 # strategy
@@ -29,7 +29,7 @@ ask the user between rounds.
 2. Facts about the site, SERPs, AI answers or ad accounts that no available tool can supply come only from
    the user, or from earlier packs in the workspace. Label them `user_supplied <date>` or
    `assumption (unverified)`. If a fact is missing, it becomes a NEEDS line with its epic tag; never
-   fetch it with web search and never invent it.
+   fetch it with web search and never invent it. The one exception is what the client's own public site states: `site-profile` (fetched by you, free, step 3) supplies it.
 3. Personas are the sub-agents of this plugin. If spawning a persona fails because it does not exist,
    say so and offer `--quick`.
 4. `--team` works only if the environment variable `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` is `1` and the
@@ -62,7 +62,7 @@ Files live in `<workspace_dir>/<client>/parties/<YYYYMMDD>-<slug>/` (create the 
    (Recommended) / drop the flag).
 3. **Pack.** Build or reuse the evidence pack (`pack.md`, or a link to `packs/<id>.md`) in the format
    of `references/schemas.md`: facts F1..Fn with source and provenance, third-party text only inside
-   fenced `UNTRUSTED` blocks, private data only as aggregates. Ask the user for missing facts in one AskUserQuestion call (options are plausible values or "Unknown, mark
+   If a site or client domain is known, first load `site-profile` and run it with `WebFetch` (or the host equivalent) unless `site-profile.md` is under 30 days old; add its observed or inferred fields to the pack as facts with provenance `site_fetch <date> (observed|inferred)` and its URL, never as seocli data.    fenced `UNTRUSTED` blocks, private data only as aggregates. Ask the user for missing facts in one AskUserQuestion call (options are plausible values or "Unknown, mark
    NEEDS"), at most 4 questions per call.
 4. **Pre-flight.** Print one block (seats x rounds, model per seat, estimated tokens, "seocli credits: 0"),
    then ask the mode with AskUserQuestion: `standard` = debate (Recommended), `quick` = inline, no spawns,

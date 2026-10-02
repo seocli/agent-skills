@@ -15,7 +15,7 @@ const warn = (file, msg) => warnings.push(`${relative(REPO, file)}: ${msg}`);
 
 const KNOWLEDGE = [
   'methodology', 'seocli-tools', 'technical-seo', 'search-analytics', 'content-quality',
-  'local-seo', 'geo-visibility', 'google-ads', 'meta-ads', 'marketing-strategy',
+  'local-seo', 'geo-visibility', 'google-ads', 'meta-ads', 'marketing-strategy', 'site-profile',
 ];
 const LIMITS = { agent: 120, command: 200, knowledge: 250, reference: 200 };
 const PRELOAD_MAX_SKILLS = 3;
@@ -153,6 +153,8 @@ for (const [file, { kind, fm, body, text }] of info) {
     if (!text.includes('AskUserQuestion')) err(file, 'command skill must reference AskUserQuestion');
     if (!/numbered list/i.test(text)) err(file, 'command skill must describe the numbered-list fallback');
     if (!/AskUserQuestion/.test(String(fm['allowed-tools'] ?? ''))) err(file, 'command skill must list AskUserQuestion in allowed-tools');
+    if (!/\bWebFetch\b/.test(String(fm['allowed-tools'] ?? ''))) err(file, 'command skill must list WebFetch in allowed-tools');
+    if (!text.includes('site-profile')) err(file, 'command skill must reference the site-profile step');
   }
   if (kind === 'agent') {
     const tools = String(fm.tools ?? '').split(',').map((t) => t.trim()).filter(Boolean);

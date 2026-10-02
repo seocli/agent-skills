@@ -2,7 +2,7 @@
 name: ads-audit
 description: Paid campaign audit method for Google Ads, Merchant Center and Meta Ads as a checklist with targeted questions. No account data tool exists yet, so it produces what to check and in which order, and judges only the answers the user states. Use when the user asks to audit ads or a feed; arguments google, merchant or meta.
 argument-hint: "<google | merchant | meta> [client]"
-allowed-tools: AskUserQuestion
+allowed-tools: AskUserQuestion, WebFetch
 ---
 
 # ads-audit
@@ -26,7 +26,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 2. This version is checklist-and-questions only. The user reads the platform screens and states answers
    in the conversation. Pasted exports and screenshots are not accepted as data.
 3. Merchant Center price benchmarks are never shown now; later only from the client's own account.
-4. No web search and no invented benchmarks, scores or amounts.
+4. No web search and no invented benchmarks, scores or amounts. The only web read is the client's own site through `site-profile`.
 
 ## Cost
 
@@ -35,26 +35,27 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 
 ## Steps
 
-1. **Intake.** One AskUserQuestion call (up to 4 questions): client (from the `seocli:manage_clients` list,
+1. **Site profile.** If the client has a domain or the user gave a site, load `site-profile` and run it first (`WebFetch` or the host equivalent, free); reuse `site-profile.md` if younger than 30 days. Use it to pre-fill business model, goal, country and language, and skip every question the profile answers (confidence `observed`); ask `inferred` ones as a confirmation option and `unknown` ones normally. It never supplies account data, spend or performance.
+2. **Intake.** One AskUserQuestion call (up to 4 questions): client (from the `seocli:manage_clients` list,
    or "No client"), business goal (sales / leads / calls), monthly spend range, country and language
    (default IT/it, recommended). Margin or target CPA only if the user volunteers it.
-2. **Checklist.** From the knowledge skill, give the audit checklist for the platform in order:
+3. **Checklist.** From the knowledge skill, give the audit checklist for the platform in order:
    measurement first (primary conversions, values, deduplication, consent mode, tag health), then
    account structure, bidding and learning, queries and negatives or placements, creative, feed (Merchant), policy status.
    For each item: where to look in the platform, what good looks like, why it matters.
-3. **Questions.** Turn the checklist into at most 12 closed questions in priority order, grouped by theme,
+4. **Questions.** Turn the checklist into at most 12 closed questions in priority order, grouped by theme,
    each answerable from the platform in under a minute. Ask them in AskUserQuestion calls of at most 4
    questions each (one call per theme, 2-4 answer bands as options, "I don't know" as the last option
    recorded as `n/d`), not as a free-text list.
-4. **Pack.** Write answers to `<workspace_dir>/<client or local>/packs/<date>-ads-<platform>.md` as
+5. **Pack.** Write answers to `<workspace_dir>/<client or local>/packs/<date>-ads-<platform>.md` as
    facts `F1..Fn` with provenance `user_supplied <date>`; never sum, average or score them. Free text from
    the user goes in a fenced `UNTRUSTED` block.
-5. **Dispatch.** `google-ads-manager` for google and merchant, `meta-ads-manager` for meta, with the
+6. **Dispatch.** `google-ads-manager` for google and merchant, `meta-ads-manager` for meta, with the
    brief: Objective, Pack, Read also (checklist reference), Output (methodology contract, 400 words),
    Boundaries. Add `skeptic` for the grade when the audit goes to a client.
-6. **Present.** Answer first: the likely binding constraint if the answers support one, else
+7. **Present.** Answer first: the likely binding constraint if the answers support one, else
    "undetermined". Findings by mechanism and severity, not by invented euros. Unanswered items listed as NOT ASSESSED.
-7. **Next.** Offer `/seocli-seo:strategy` for a channel-mix or budget decision.
+8. **Next.** Offer `/seocli-seo:strategy` for a channel-mix or budget decision.
 
 ## Errors
 

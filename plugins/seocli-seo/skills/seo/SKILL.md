@@ -2,7 +2,7 @@
 name: seo
 description: Entry point for SEO, GEO and paid-media work with seocli. Checks which seocli tools are available, shows credits and clients, routes to the right flow or specialist and shows credit estimates before paid calls. Use when the right command is unclear, or to check the connection, balance, price list, clients or a running operation; use audit for a site-wide audit, page for one page in this repository, keywords for keyword work, geo for AI answers, ads-audit for campaigns; decisions go to /seocli-seo:strategy.
 argument-hint: "[client or domain] [goal]"
-allowed-tools: AskUserQuestion
+allowed-tools: AskUserQuestion, WebFetch
 ---
 
 # seo
@@ -39,7 +39,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 
 ## Cost
 
-- Free now: `seocli:get_status`, `seocli:manage_clients`, `seocli:get_credit_balance`,
+- Free now: the site profile (web fetch of the client's public pages, 0 credits), `seocli:get_status`, `seocli:manage_clients`, `seocli:get_credit_balance`,
   `seocli:get_price_list`, `seocli:get_operation`. None of them spends credits.
 - Paid tools do not exist yet. When they do, follow `seocli-tools` rule 4-9 without exceptions:
   1. read the price list once per session;
@@ -53,11 +53,12 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 
 ## Steps
 
-1. **Session check.** Run the Availability steps. Report in one line: server reachable, N tools
+1. **Site profile.** If a site URL or domain is in the request, or becomes known from the selected client (step 4), do not ask what the business is: load `site-profile` and run its procedure with the host web-fetch tool (`WebFetch` in Claude Code), free and before planning or any paid call. Ask only the `unknown` fields (AskUserQuestion). No fetch tool in the host: ask for a short description. The profile goes to `<client or domain>/site-profile.md`; reuse it if younger than 30 days. Create the workspace first (step 9, `.gitignore` included).
+2. **Session check.** Run the Availability steps. Report in one line: server reachable, N tools
    available, account state.
-2. **Credits.** Call `seocli:get_credit_balance` and `seocli:get_price_list` (both free). Show the
+3. **Credits.** Call `seocli:get_credit_balance` and `seocli:get_price_list` (both free). Show the
    balance as included, top-up and total, and the price list version. Quote prices only from the list.
-3. **Clients.** Call `seocli:manage_clients` with `action: list`.
+4. **Clients.** Call `seocli:manage_clients` with `action: list`.
    - Several clients and none named: ask which one (AskUserQuestion, one option per client, up to 4 plus
      "Other"; more than 4: the 3 most recently used first). Pre-sales on a bare domain is an option.
    - A domain or client name was given: match it to a client. No match: ask with AskUserQuestion
@@ -66,10 +67,10 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
    - `rename`, `archive`, `restore` and `get` need the client `id` from the list. Do them only when asked.
    - `delete` is irreversible and removes all the client's data: act only on an explicit request in
      this turn, after restating the client name and domain and getting a yes.
-4. **Operations.** When the user gives an operation id or has open ones in the workspace
+5. **Operations.** When the user gives an operation id or has open ones in the workspace
    `operations.md`, call `seocli:get_operation` and report status, kind, cost and outcome.
    Follow the polling schedule in `seocli-tools`.
-5. **Route by intent.** Present only what works today and be honest about the rest:
+6. **Route by intent.** Present only what works today and be honest about the rest:
 
 | The user wants | Today | Later |
 |---|---|---|
@@ -86,7 +87,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 
    For a request outside the first row, answer with general methodology (`methodology` skill) where
    that helps, label it "general guidance, no seocli data", and say what would be needed to measure it.
-6. **Effort ladder.** Never start heavy work for a light question. When the request fits more than one
+7. **Effort ladder.** Never start heavy work for a light question. When the request fits more than one
    row, ask the level with AskUserQuestion, cheapest sufficient row first as (Recommended), tokens in
    each description:
 
@@ -101,11 +102,11 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
    a tool not yet available lists it under NEEDS. For "ask the <persona>": spawn that one persona with the
    brief Objective, Pack (absolute path), Read also, Output (methodology contract, 400 words), Boundaries
    (own remit; missing data to NEEDS), and relay its answer under its label.
-7. **Workspace.** The first time you need to write a file, create the folder named by the plugin
+8. **Workspace.** The first time you need to write a file, create the folder named by the plugin
    option `workspace_dir` (default `seo-workspace`) in the project, with a `.gitignore` containing
    exactly `*`, because it holds client data. Do this before writing anything into it. Layout in
    `seocli-tools`.
-8. **Persist.** Append open operation ids to `<client>/operations.md` and accepted decisions to
+9. **Persist.** Append open operation ids to `<client>/operations.md` and accepted decisions to
    `<client>/decisions.md`. Keep raw tool output out of the conversation: store it in a pack and keep a summary.
 
 ## Errors

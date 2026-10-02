@@ -38,3 +38,10 @@ Recorded when the build departs from `docs/DESIGN.md`. Newest last.
     point, with the numbered list only as fallback. `allowed-tools: AskUserQuestion` is added to the four
     command skills; lint requires it plus the fallback. Personas cannot use the tool (not available in
     sub-agents), so a pinned `ASK` sentence and a `QUESTIONS` field in the output contract were added.
+13. **Client web fetch for site understanding (product-owner rule, section 5.11).** Sections 1.2 and 8.5
+    treat third-party web text as a source the plugin does not use. Exception: the lead (never a persona)
+    may fetch a bounded set of public pages of the client's own site with the host's web-fetch tool
+    (`WebFetch`) to infer what the business is. The text is untrusted, the step is free, it yields no SEO
+    metrics and does not replace seocli data. New knowledge skill `site-profile`; `WebFetch` added to
+    `allowed-tools` of the four command skills (Claude Code documents that field as a pre-approval, not a
+    restriction); personas keep `tools: Read, Grep, Glob`. Lint now requires both on command skills.

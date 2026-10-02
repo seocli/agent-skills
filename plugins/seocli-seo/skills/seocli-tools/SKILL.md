@@ -94,6 +94,7 @@ use create it with a `.gitignore` containing `*` and nothing else. Layout:
 seo-workspace/
   .gitignore            "*"
   <client>/packs/<YYYY-MM-DD>-<slug>.md   facts F1..Fn, each with tool, date, period, provenance
+  <client>/site-profile.md                business profile from the public site (skill site-profile), refresh after 30 days
   <client>/decisions.md                   append-only
   <client>/operations.md                  open operation ids, launched date, what they are for
   <client>/parties/<YYYYMMDD>-<slug>/     strategy rounds (when that command exists)

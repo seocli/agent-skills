@@ -2,7 +2,7 @@
 name: page
 description: Developer review of one page in the user's own repository - meta tags, headings, canonical, robots directives, JSON-LD, internal links, rendering and speed - with patch proposals applied only after approval. Use when the user points at a template, HTML file or localhost URL; works on local files without seocli credits. The server-side HTML check is planned.
 argument-hint: "<file | localhost-url> [intended-public-url]"
-allowed-tools: AskUserQuestion
+allowed-tools: AskUserQuestion, WebFetch
 ---
 
 # page
@@ -48,6 +48,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
    Lighthouse if found (yes / no), apply patches (one by one (Recommended) / report only). For a URL accept only `localhost` or `127.0.0.1`. Read the template,
    its layout or partials, `robots.txt`, sitemap generation and head/meta helpers that you can find with Glob and Grep.
    Note the framework from the repository (package files, config).
+   If the intended public URL is a live site, load `site-profile` and fetch it with `WebFetch` (or the host equivalent) per that skill, free, before the review: business type, language and market, YMYL and conversion goals inform the checks. This is the only remote read; canonical, hreflang and speed judgements stay on the local code. Reuse `site-profile.md` if younger than 30 days.
 2. **Speed (optional).** Only if chosen at intake and Lighthouse is present, the dev server is running and the URL is
    local: `lighthouse <url> --output=json --only-categories=performance --quiet`, written to a temporary
    file; keep scores and the main metrics, not the raw JSON.
