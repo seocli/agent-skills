@@ -25,7 +25,7 @@ ask the user between rounds.
 ## Availability
 
 1. The round-table needs no seocli tool. Free tools may fill the evidence pack: `seocli:get_status`,
-   `seocli:manage_clients`, `seocli:get_credit_balance`, `seocli:get_price_list`, `seocli:get_operation`.
+   `seocli:manage_clients`, `seocli:get_credit_balance`, `seocli:list_credit_movements`, `seocli:get_price_list`, `seocli:get_operation`.
 2. Facts about the site, SERPs, AI answers or ad accounts that no available tool can supply come only from
    the user, or from earlier packs in the workspace. Label them `user_supplied <date>` or
    `assumption (unverified)`. If a fact is missing, it becomes a NEEDS line with its epic tag; never
