@@ -4,8 +4,8 @@ volatile: false
 # Page-type fit against the SERP (SXO)
 
 All `[H]`: a practitioner method built on observable SERP signals. A technically perfect page of the
-wrong type rarely ranks. Needs `seocli:check_serp` (E3.1) for the top 10 and `seocli:check_page_html`
-(E6.7) for the target page; without them, ask the user for both.
+wrong type rarely ranks. Needs `seocli:check_serp` for the top 10 and
+`seocli:check_page_html` (E6.7) for the target page; without them, ask the user for both.
 
 ## Eight page types
 

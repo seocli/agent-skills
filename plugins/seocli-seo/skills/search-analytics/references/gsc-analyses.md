@@ -27,7 +27,7 @@ non-brand queries, desktop and mobile separately. Require 1,000 or more impressi
 buckets; interval = CTR +/- 1.96 x sqrt(CTR(1-CTR)/impressions). Brand inflates position-1 CTR, so
 exclude it. Refit every quarter. Published industry curves are dataset-specific and shift with AI
 answers: sanity check only, never a default for a client (DESIGN 9.3: no primary source; `[H]`).
-Bucketing by an averaged position blurs the curve; prefer exact ranks from `seocli:check_serp` (E3.1) when available.
+Bucketing by an averaged position blurs the curve; prefer exact ranks from `seocli:check_serp` when available.
 
 ## Cannibalisation
 

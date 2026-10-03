@@ -21,7 +21,7 @@ results into findings and recommendations.
    authenticate `seocli`) and stop. If a tool is missing, say: "This capability (<plain name>) is not
    available on your seocli server yet." Never substitute web search, memory or invented numbers.
 3. **Names come from `references/tool-map.md`.** Never write or call a tool that is not in that map.
-   A planned tool is written with its epic tag, for example `seocli:check_serp` (E3.1), and is never
+   A planned tool is written with its epic tag, for example `seocli:check_serp`, and is never
    called until the live tool list contains it.
 4. **Price before paying.** Read `seocli:get_price_list` once per session (free). Show the plan total
    as an estimate every time. Ask for an explicit yes only when the total exceeds the configured

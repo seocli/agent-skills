@@ -3,7 +3,7 @@ volatile: false
 
 # Content briefs and topic clusters
 
-All `[H]` defaults. Data: `seocli:check_serp` (E3.1), `seocli:research_keywords` (E5.1),
+All `[H]` defaults. Data: `seocli:check_serp`, `seocli:research_keywords` (E5.1),
 `seocli:select_keywords` (E5.2); without them, ask the user for SERP exports.
 
 ## Brief template

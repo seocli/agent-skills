@@ -44,7 +44,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 
 - Free now: the site profile (web fetch of the client's public pages, 0 credits), the domain KB (Claude tokens only, `/seocli-seo:kb`), `seocli:get_status`, `seocli:manage_clients`, `seocli:get_credit_balance`,
   `seocli:list_credit_movements`, `seocli:get_price_list`, `seocli:get_operation`. None of them spends credits.
-- Paid tools do not exist yet. When they do, follow `seocli-tools` rule 4-9 without exceptions:
+- Paid tools (today `seocli:check_serp`): follow `seocli-tools` rule 4-9 without exceptions:
   1. read the price list once per session;
   2. show the plan total as "Estimate: N credits (price list vN)" every time;
   3. ask for the explicit yes with AskUserQuestion ("Run, estimate N credits (Recommended)" / "Reduce
@@ -82,7 +82,8 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 | a site-wide audit | not available yet (`/seocli-seo:audit`, needs the crawl tools) | after the audit milestone |
 | one page in this repository | local review of files you point at (`/seocli-seo:page`), no credits | server HTML check (`seocli:check_page_html` (E6.7)) |
 | keywords, briefs, clusters | not available yet (`/seocli-seo:keywords`, `seocli:research_keywords` (E5.1)) | after the keyword milestone |
-| AI answers, SERP checks | not available yet (`/seocli-seo:geo`, `seocli:check_serp` (E3.1), `seocli:check_geo` (E3.2)) | after the SERP and GEO milestone |
+| SERP positions for 1-10 keywords | `seocli:check_serp` (paid, estimate first: rules below) | cache and history reads in later releases |
+| AI answers | not available yet (`/seocli-seo:geo`, `seocli:check_geo` (E3.2)) | after the GEO milestone |
 | Search Console or GA4 | not available yet (`seocli:get_search_console_data` (E7.4), `seocli:get_analytics_data` (E7.5)) | after the Google data milestone |
 | what changed lately | not available yet (`seocli:get_summary` (E4.3)) | after the monitors milestone |
 | paid campaigns audit | checklist and questions only (`/seocli-seo:ads-audit`), no account data | a later server epic |
