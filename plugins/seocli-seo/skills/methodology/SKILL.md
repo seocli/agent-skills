@@ -95,7 +95,7 @@ NOT ASSESSED: what could not be measured and why
 ```
 
 At most 400 words outside party mode, plus code diffs when asked. Planned tools in NEEDS carry their
-epic tag, for example `seocli:check_serp` (E3.1); see `seocli-tools`. The lead turns QUESTIONS into
+epic tag, for example `seocli:check_serp`; see `seocli-tools`. The lead turns QUESTIONS into
 AskUserQuestion calls (see `seocli-tools` rule 13); personas never ask the user themselves.
 
 ## Pinned sentences

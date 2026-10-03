@@ -4,7 +4,7 @@ volatile: false
 # Keywords, intent, SERP overlap, SERP features, competitor gap
 
 All thresholds are `[H]` defaults: validate on the client's data before quoting them. Data tools are
-planned: `seocli:research_keywords` (E5.1), `seocli:select_keywords` (E5.2), `seocli:check_serp` (E3.1),
+planned: `seocli:research_keywords` (E5.1), `seocli:select_keywords` (E5.2), `seocli:check_serp`,
 `seocli:find_competitors` (E5.3).
 
 ## Keyword method

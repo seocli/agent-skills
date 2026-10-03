@@ -14,7 +14,7 @@ and does not say and which analysis to run. Use `methodology` for the finding an
 format, `seocli-tools` for how to fetch data and what it costs, `technical-seo` for crawl and
 indexing causes, `content-quality` for page-level quality and page-type fit, `geo-visibility` for AI
 answers. Data tools named here are planned: `seocli:get_search_console_data` (E7.4),
-`seocli:get_analytics_data` (E7.5), `seocli:find_cannibalization` (E7.4), `seocli:check_serp` (E3.1),
+`seocli:get_analytics_data` (E7.5), `seocli:find_cannibalization` (E7.4), `seocli:check_serp`,
 `seocli:research_keywords` (E5.1), `seocli:select_keywords` (E5.2). Never promise one that the live
 tool list does not contain.
 

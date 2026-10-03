@@ -13,7 +13,7 @@ brief, plan a topic cluster, judge a set of templated pages, or assess trust sig
 `search-analytics` for the performance numbers behind a content decision (decay, cannibalisation,
 intent labels), `technical-seo` for indexing and markup, `local-seo` for location pages and Business
 Profile, `methodology` for the recommendation format. Data tools named here are planned:
-`seocli:check_serp` (E3.1), `seocli:check_page_html` (E6.7), `seocli:crawl_site` (E6.1). Never promise
+`seocli:check_serp`, `seocli:check_page_html` (E6.7), `seocli:crawl_site` (E6.1). Never promise
 one that the live tool list does not contain; without them, ask the user for the page text or SERP.
 
 ## Rules

@@ -11,7 +11,7 @@ fail at any stage, so locate the stage before proposing a tactic.
 | 0 Activation | Did the engine search the web for this prompt? | Citations or sub-queries present in the answer; answers from model memory alone carry mentions, not citations |
 | 1 Crawl access | Is the engine's search bot allowed and reachable? | robots.txt per bot, WAF 403/429, server logs, published IP lists (`bot-access-matrix.md`) |
 | 2 Index | Is the page in the underlying index (Google, Bing, engine's own)? | Search Console, Bing Webmaster, `seocli:inspect_indexing` (E7.4) |
-| 3 Retrieval | Does the page rank for the engine's fan-out sub-queries? | Capture exposed sub-queries and test them as ordinary searches (`seocli:check_serp` (E3.1)) |
+| 3 Retrieval | Does the page rank for the engine's fan-out sub-queries? | Capture exposed sub-queries and test them as ordinary searches (`seocli:check_serp`) |
 | 4 Selection | Is it chosen among candidates? | Citation present over n samples |
 | 5 Absorption | Does the answer reuse the page's facts or wording? | Compare answer text with the page |
 | 6 Prominence | Is the brand named, positioned, described accurately? | Mention extraction, accuracy review |

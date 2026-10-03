@@ -58,7 +58,7 @@ spam policy, `search-analytics` for Search Console data. Tags: `[G]` Google prim
   and physical-address checks `[H]`.
 - Review rhythm beats a one-off burst: steady monthly reviews, owner replies to all `[H]`.
 - Audit model, evidence labels and limits: `references/audit-model.md`. Data requests (lead executes):
-  `seocli:manage_google` (E7.1) for profile data, `seocli:check_serp` (E3.1) for the local pack.
+  `seocli:manage_google` (E7.1) for profile data, `seocli:check_serp` for the local pack.
 - Say what seocli cannot verify: true map position per point, verification status, profile insights `[H]`.
 
 ## Do not recommend

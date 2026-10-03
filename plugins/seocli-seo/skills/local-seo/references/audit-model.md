@@ -12,7 +12,7 @@ rule. Rules with a Google source are in the skill and the two other references.
    legal, home services, real estate, car trade) from the site; verticals change the profile fields that
    matter.
 2. Collect facts: profile fields, website name-address-phone, markup, location pages, directory listings,
-   review counts and dates, the local pack for the main queries (`seocli:check_serp` (E3.1)).
+   review counts and dates, the local pack for the main queries (`seocli:check_serp`).
 3. Score only what was measured. A dimension with no data is `n/d`, and the total is withheld if fewer
    than four of the six dimensions were measured.
 4. Report with the four fields from `methodology`.

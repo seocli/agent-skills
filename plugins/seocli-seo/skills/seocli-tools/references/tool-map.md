@@ -1,10 +1,10 @@
 last_verified: 2026-10-02
 volatile: true
 
-# Tool map (server v0.5.0)
+# Tool map (server v0.6.0)
 
 The machine-readable copy is `tests/contract/tools.json` in the plugin repository; the lint keeps the
-two consistent with every file of the plugin. Status "now" means exposed by server v0.5.0.
+two consistent with every file of the plugin. Status "now" means exposed by server v0.6.0.
 
 ## Available now
 
@@ -15,6 +15,7 @@ two consistent with every file of the plugin. Status "now" means exposed by serv
 | `seocli:get_credit_balance` | none | free | `included` (this period), `topup`, `total`, and `plan`: the account plan (`pending` = waiting for activation, `beta`; later `active`, `suspended`). |
 | `seocli:list_credit_movements` | `from`, `to` (`YYYY-MM-DD`, UTC, inclusive; default: start of the current credit period to today), `client_id` (uuid or `none`), `limit` (1-500, default 100), `cursor` | free | Credit ledger, newest first: `movements[]` with `kind`, signed `credits` (balance change) and `amount`; `summary[]` per client with `charged` over the whole period; `next_cursor` until the last page. A reservation subtracts the estimate, a release returns the unused part, a confirmation records the charge in `amount` with 0 change. |
 | `seocli:get_price_list` | none | free | `version` and `items[]` with `operation` code, `description`, `unit`, `credits`. |
+| `seocli:check_serp` | `keywords` (1-10), `country` (ISO, default IT), `language` (default it), `device` (desktop/mobile), `client_id` **or** `domain` (pre-sales, not saved), `max_credits` | **paid**: 3 credits per page of 10 results read; reading stops at the page where the site appears; estimate 30 per keyword, charge = pages read | Per keyword: `position` (`ranked: false` if not in the first 100), `url`, `other_urls`, up to 10 `competitors` (position, domain, url), `features` (people_also_ask, local_pack, shopping, ai_overview *seen on the page*), `pages_read`, `mode` live, `origin`, `collected_at`; `failed` keywords make the answer `partial` and are not charged. Titles of third-party results only in `external_sources` (`type` serp_result, `url`, `title`, `collected_at`). A client check goes to the client's history. Same request within 10 minutes: `partial`, no data, no new charge (cache arrives later). |
 | `seocli:get_operation` | `id` | free | `status` (queued, running, completed, partial, failed), `kind`, `client_id`, `cost`, `outcome`, timestamps. |
 
 Price-list codes today: `serp_queued`, `serp_live`, `geo`, `keyword_research`, `page_crawl`,
@@ -25,7 +26,6 @@ list; a code in the list does not mean the tool that uses it already exists.
 
 | Tool | Planned in | Capability in plain words |
 |---|---|---|
-| `seocli:check_serp` | E3.1 | search results check for a keyword |
 | `seocli:check_geo` | E3.2, E3.3 | presence in AI answers |
 | `seocli:get_visibility_history` | E3.4 | visibility over time |
 | `seocli:delete_account` | E3.5 | delete the account and its data |
@@ -52,4 +52,4 @@ plainly when asked; do not accept pasted exports as a substitute data source in 
 
 ## Sources
 
-- seocli-api v0.5.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-02.
+- seocli-api v0.6.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-02.
