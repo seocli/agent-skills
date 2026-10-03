@@ -64,6 +64,9 @@ results into findings and recommendations.
 
 - Check price and balance together at session start: `seocli:get_credit_balance` and
   `seocli:get_price_list` are both free. `[H]`
+- SERP data can come from the shared 24 h cache: always show `collected_at` and say "cached" when
+  `origin` is `cache`. Offer `refresh` (full price, estimate first) only when the user needs data
+  fresher than the cached date. `[H]`
 - To rebill clients or answer "how much did I spend on X", read `summary[].charged` from
   `seocli:list_credit_movements` for the period (free); never add up reservations, which include
   open operations and refunded parts. `[H]`
