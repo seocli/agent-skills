@@ -67,6 +67,8 @@ results into findings and recommendations.
 - SERP data can come from the shared 24 h cache: always show `collected_at` and say "cached" when
   `origin` is `cache`. Offer `refresh` (full price, estimate first) only when the user needs data
   fresher than the cached date. `[H]`
+- Report what was charged (`cost.charged`) and why (pages read); the estimate is only the maximum
+  reserved before the call, so never present the difference as a saving or a discount. `[H]`
 - To rebill clients or answer "how much did I spend on X", read `summary[].charged` from
   `seocli:list_credit_movements` for the period (free); never add up reservations, which include
   open operations and refunded parts. `[H]`
