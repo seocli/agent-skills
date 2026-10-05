@@ -1,10 +1,10 @@
 last_verified: 2026-10-02
 volatile: true
 
-# Tool map (server v0.6.0)
+# Tool map (server v0.7.0)
 
 The machine-readable copy is `tests/contract/tools.json` in the plugin repository; the lint keeps the
-two consistent with every file of the plugin. Status "now" means exposed by server v0.6.0.
+two consistent with every file of the plugin. Status "now" means exposed by server v0.7.0.
 
 ## Available now
 
@@ -16,7 +16,8 @@ two consistent with every file of the plugin. Status "now" means exposed by serv
 | `seocli:list_credit_movements` | `from`, `to` (`YYYY-MM-DD`, UTC, inclusive; default: start of the current credit period to today), `client_id` (uuid or `none`), `limit` (1-500, default 100), `cursor` | free | Credit ledger, newest first: `movements[]` with `kind`, signed `credits` (balance change) and `amount`; `summary[]` per client with `charged` over the whole period; `next_cursor` until the last page. A reservation subtracts the estimate, a release returns the unused part, a confirmation records the charge in `amount` with 0 change. |
 | `seocli:get_price_list` | none | free | `version` and `items[]` with `operation` code, `description`, `unit`, `credits`. |
 | `seocli:check_serp` | `keywords` (1-10), `country` (ISO, default IT), `language` (default it), `device` (desktop/mobile), `client_id` **or** `domain` (pre-sales, not saved), `refresh` (force new data at full price), `max_credits` | **paid**: 3 credits per page of 10 results read; reading stops at the page where the site appears; estimate 30 per keyword, charge = pages read. Shared 24 h cache: data already paid by this account = free; any other check = full price (pages needed by the site), with `collected_at` showing the data date; `refresh` = full price | Per keyword: `position` (`ranked: false` if not in the first 100), `url`, `other_urls`, up to 10 `competitors` (position, domain, url), `features` (people_also_ask, local_pack, shopping, ai_overview *seen on the page*), `pages_read`, `mode` live, `origin` (`fresh` or `cache`: then `collected_at` is the date of the cached data, up to 24 h old); `failed` keywords make the answer `partial` and are not charged. Titles of third-party results only in `external_sources` (`type` serp_result, `url`, `title`, `collected_at`). A client check goes to the client's history. Repeating a finished check returns the cached data (free if already yours); only a request still running answers `partial` "richiesta identica". |
-| `seocli:get_operation` | `id` | free | `status` (queued, running, completed, partial, failed), `kind`, `client_id`, `cost`, `outcome`, timestamps. |
+| `seocli:check_geo` | `keyword`, `country`, `language`, `device`, `client_id` **or** `domain`, `samples` (1-30, default 10), `max_credits` | **paid**: 8 credits per sample (estimate samples × 8); only successful samples are charged | Background: returns an operation id at once; read the result with `seocli:get_operation` (samples take 10-45 s each, run in parallel). Today one engine: Google AI Overview (more engines later). Client checks go to the client's GEO history. |
+| `seocli:get_operation` | `id` | free | `status` (queued, running, completed, partial, failed), `kind`, `client_id`, `cost`, `outcome`, timestamps. For a finished GEO check also `result`: per engine, samples, AI Overview presence, `cited` and `mentioned` as `{count, total, rate, low, high}` (Wilson 95% interval), `insufficient_sample` (fewer than 10 successful samples: never say "not cited"), and an approximation note; cited sources in `external_sources` with how many samples cited them. |
 
 Price-list codes today: `serp_queued`, `serp_live`, `geo`, `keyword_research`, `page_crawl`,
 `page_crawl_rendered`, `html_check`, `pagespeed`, `search_console`, `analytics`. Always read the live
@@ -26,7 +27,6 @@ list; a code in the list does not mean the tool that uses it already exists.
 
 | Tool | Planned in | Capability in plain words |
 |---|---|---|
-| `seocli:check_geo` | E3.2, E3.3 | presence in AI answers |
 | `seocli:get_visibility_history` | E3.4 | visibility over time |
 | `seocli:delete_account` | E3.5 | delete the account and its data |
 | `seocli:manage_monitors` | E4.1 | scheduled monitors |
@@ -52,4 +52,4 @@ plainly when asked; do not accept pasted exports as a substitute data source in 
 
 ## Sources
 
-- seocli-api v0.6.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-02.
+- seocli-api v0.7.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-02.
