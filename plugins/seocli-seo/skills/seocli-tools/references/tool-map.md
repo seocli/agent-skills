@@ -1,10 +1,10 @@
 last_verified: 2026-10-02
 volatile: true
 
-# Tool map (server v0.8.0)
+# Tool map (server v0.9.0)
 
 The machine-readable copy is `tests/contract/tools.json` in the plugin repository; the lint keeps the
-two consistent with every file of the plugin. Status "now" means exposed by server v0.8.0.
+two consistent with every file of the plugin. Status "now" means exposed by server v0.9.0.
 
 ## Available now
 
@@ -17,6 +17,7 @@ two consistent with every file of the plugin. Status "now" means exposed by serv
 | `seocli:get_price_list` | none | free | `version` and `items[]` with `operation` code, `description`, `unit`, `credits`. |
 | `seocli:check_serp` | `keywords` (1-10), `country` (ISO, default IT), `language` (default it), `device` (desktop/mobile), `client_id` **or** `domain` (pre-sales, not saved), `refresh` (force new data at full price), `max_credits` | **paid**: 3 credits per page of 10 results read; reading stops at the page where the site appears; estimate 30 per keyword, charge = pages read. Shared 24 h cache: data already paid by this account = free; any other check = full price (pages needed by the site), with `collected_at` showing the data date; `refresh` = full price | Per keyword: `position` (`ranked: false` if not in the first 100), `url`, `other_urls`, up to 10 `competitors` (position, domain, url), `features` (people_also_ask, local_pack, shopping, ai_overview *seen on the page*), `pages_read`, `mode` live, `origin` (`fresh` or `cache`: then `collected_at` is the date of the cached data, up to 24 h old); `failed` keywords make the answer `partial` and are not charged. Titles of third-party results only in `external_sources` (`type` serp_result, `url`, `title`, `collected_at`). A client check goes to the client's history. Repeating a finished check returns the cached data (free if already yours); only a request still running answers `partial` "richiesta identica". |
 | `seocli:check_geo` | `keyword`, `country`, `language`, `device`, `client_id` **or** `domain`, `engines` (`ai_overview` default, `chatgpt`, `gemini`, `perplexity`, `claude`), `question` (a natural question in the user's language that you write and show the user first; default: the keyword), `samples` (1-30, default 10), `refresh` (skip the cache), `max_credits` | **paid** per sample and per engine: AI Overview 8, ChatGPT 30, Gemini 50, Perplexity 10, Claude 70 credits (estimate = samples × sum of the chosen engines; 10 samples on all four AI engines = 1,600, above the default ceiling of 500: always show it and pass `max_credits`); only successful samples are charged. Shared 7-day lot cache: samples already paid by this account are free; samples from the cache paid by others and new samples cost 8 each; `refresh` reads all samples fresh | Background: returns an operation id at once; read the result with `seocli:get_operation` (samples take 10-45 s each, run in parallel). Engines run in the same operation; only the question reaches them (never the site or client data). Client checks go to the client's GEO history. |
+| `seocli:get_visibility_history` | `client_id`, `keyword` (optional), `kind` (`serp`, `geo`, `all`), `from`/`to` (`YYYY-MM-DD`, default last 90 days) | free | Client history only (pre-sales checks are never stored). `series[]`: SERP per keyword (points with position or none, URL; changes `rise`, `fall`, `entered`, `left`) and GEO per engine and question (one point per check with samples, rate and Wilson interval; changes `new_citation`, `lost_citation`, `insufficient_sample`). Each series has `chart` (`title`, `unit`, `inverted_axis`): draw it (see `SKILL.md`). `truncated` when a series exceeds 500 points. |
 | `seocli:get_operation` | `id` | free | `status` (queued, running, completed, partial, failed), `kind`, `client_id`, `cost`, `outcome`, timestamps. For a finished GEO check also `result`: per engine (`engines[]`, each with `search_activated`: an engine that answered without searching the web is a valid outcome), samples, AI Overview presence, `cited` and `mentioned` as `{count, total, rate, low, high}` (Wilson 95% interval), `ai_overview_absent` (Google showed no AI Overview in any sample: say so, do not suggest more samples), `insufficient_sample` (AI Overview seen but fewer than 10 successful samples and no citation: never say "not cited"), an approximation note, `fresh_samples` / `cache_samples` and `oldest_sample_at` (say how old the cached samples are); cited sources in `external_sources` with how many samples cited them. |
 
 Price-list codes today: `serp_queued`, `serp_live`, `geo`, `keyword_research`, `page_crawl`,
@@ -27,7 +28,6 @@ list; a code in the list does not mean the tool that uses it already exists.
 
 | Tool | Planned in | Capability in plain words |
 |---|---|---|
-| `seocli:get_visibility_history` | E3.4 | visibility over time |
 | `seocli:delete_account` | E3.5 | delete the account and its data |
 | `seocli:manage_monitors` | E4.1 | scheduled monitors |
 | `seocli:get_summary` | E4.3 | signals and summary by severity |
@@ -52,4 +52,4 @@ plainly when asked; do not accept pasted exports as a substitute data source in 
 
 ## Sources
 
-- seocli-api v0.8.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-02.
+- seocli-api v0.9.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-02.
