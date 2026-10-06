@@ -69,6 +69,11 @@ results into findings and recommendations.
   fresher than the cached date. `[H]`
 - Report what was charged (`cost.charged`) and why (pages read); the estimate is only the maximum
   reserved before the call, so never present the difference as a saving or a discount. `[H]`
+- **Draw time series.** Claude and other clients render charts in the answer: show every
+  `seocli:get_visibility_history` series as a line chart from its `chart` hints (title, unit; SERP
+  positions with the axis inverted so 1 is at the top; GEO rates in % with the interval as a band),
+  then comment the `changes` in two or three lines. Text tables only when charts are not
+  available. `[H]`
 - To rebill clients or answer "how much did I spend on X", read `summary[].charged` from
   `seocli:list_credit_movements` for the period (free); never add up reservations, which include
   open operations and refunded parts. `[H]`
