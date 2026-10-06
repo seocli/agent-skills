@@ -84,6 +84,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 | keywords, briefs, clusters | not available yet (`/seocli-seo:keywords`, `seocli:research_keywords` (E5.1)) | after the keyword milestone |
 | SERP positions for 1-10 keywords | `seocli:check_serp` (paid, estimate first: rules below) | cache and history reads in later releases |
 | how positions and AI citations changed for a client | `seocli:get_visibility_history` (free), drawn as charts | monitors (scheduled checks) later |
+| delete my account and data (GDPR) | `seocli:delete_account` (free): show what is deleted and kept, confirm with AskUserQuestion, then request | immediate self-service deletion later |
 | presence in Google's AI Overview and in ChatGPT, Gemini, Perplexity, Claude | `seocli:check_geo` with `engines` and a `question` you propose (paid per sample and engine, background, estimate first) | history and charts later |
 | Search Console or GA4 | not available yet (`seocli:get_search_console_data` (E7.4), `seocli:get_analytics_data` (E7.5)) | after the Google data milestone |
 | what changed lately | not available yet (`seocli:get_summary` (E4.3)) | after the monitors milestone |
