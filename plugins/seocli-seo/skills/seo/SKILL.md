@@ -83,7 +83,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 | one page in this repository | local review of files you point at (`/seocli-seo:page`), no credits | server HTML check (`seocli:check_page_html` (E6.7)) |
 | keywords, briefs, clusters | not available yet (`/seocli-seo:keywords`, `seocli:research_keywords` (E5.1)) | after the keyword milestone |
 | SERP positions for 1-10 keywords | `seocli:check_serp` (paid, estimate first: rules below) | cache and history reads in later releases |
-| presence in Google's AI Overview | `seocli:check_geo` (paid per sample, background, estimate first) | other AI engines later (`/seocli-seo:geo`) |
+| presence in Google's AI Overview and in ChatGPT, Gemini, Perplexity, Claude | `seocli:check_geo` with `engines` and a `question` you propose (paid per sample and engine, background, estimate first) | history and charts later |
 | Search Console or GA4 | not available yet (`seocli:get_search_console_data` (E7.4), `seocli:get_analytics_data` (E7.5)) | after the Google data milestone |
 | what changed lately | not available yet (`seocli:get_summary` (E4.3)) | after the monitors milestone |
 | paid campaigns audit | checklist and questions only (`/seocli-seo:ads-audit`), no account data | a later server epic |
