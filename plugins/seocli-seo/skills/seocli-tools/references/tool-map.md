@@ -1,10 +1,10 @@
 last_verified: 2026-10-02
 volatile: true
 
-# Tool map (server v0.10.0)
+# Tool map (server v0.11.0)
 
 The machine-readable copy is `tests/contract/tools.json` in the plugin repository; the lint keeps the
-two consistent with every file of the plugin. Status "now" means exposed by server v0.10.0.
+two consistent with every file of the plugin. Status "now" means exposed by server v0.11.0.
 
 ## Available now
 
@@ -19,7 +19,7 @@ two consistent with every file of the plugin. Status "now" means exposed by serv
 | `seocli:check_geo` | `keyword`, `country`, `language`, `device`, `client_id` **or** `domain`, `engines` (`ai_overview` default, `chatgpt`, `gemini`, `perplexity`, `claude`), `question` (a natural question in the user's language that you write and show the user first; default: the keyword), `samples` (1-30, default 10), `refresh` (skip the cache), `max_credits` | **paid** per sample and per engine: AI Overview 8, ChatGPT 30, Gemini 50, Perplexity 10, Claude 70 credits (estimate = samples × sum of the chosen engines; 10 samples on all four AI engines = 1,600, above the default ceiling of 500: always show it and pass `max_credits`); only successful samples are charged. Shared 7-day lot cache: samples already paid by this account are free; samples from the cache paid by others and new samples cost 8 each; `refresh` reads all samples fresh | Background: returns an operation id at once; read the result with `seocli:get_operation` (samples take 10-45 s each, run in parallel). Engines run in the same operation; only the question reaches them (never the site or client data). Client checks go to the client's GEO history. |
 | `seocli:get_visibility_history` | `client_id`, `keyword` (optional), `kind` (`serp`, `geo`, `all`), `from`/`to` (`YYYY-MM-DD`, default last 90 days) | free | Client history only (pre-sales checks are never stored). `series[]`: SERP per keyword (points with position or none, URL; changes `rise`, `fall`, `entered`, `left`) and GEO per engine and question (one point per check with samples, rate and Wilson interval; changes `new_citation`, `lost_citation`, `insufficient_sample`). Each series has `chart` (`title`, `unit`, `inverted_axis`): draw it (see `SKILL.md`). GEO series also carry `question` when it differs from the keyword. `truncated` when a series exceeds 500 points; `omitted_series` > 0 when the answer hit its size cap: call again with `keyword` for the missing series. |
 | `seocli:get_operation` | `id` | free | `status` (queued, running, completed, partial, failed), `kind`, `client_id`, `cost`, `outcome`, timestamps. For a finished GEO check also `result`: per engine (`engines[]`, each with `search_activated`: an engine that answered without searching the web is a valid outcome), samples, AI Overview presence, `cited` and `mentioned` as `{count, total, rate, low, high}` (Wilson 95% interval), `ai_overview_absent` (Google showed no AI Overview in any sample: say so, do not suggest more samples), `insufficient_sample` (AI Overview seen but fewer than 10 successful samples and no citation: never say "not cited"), an approximation note, `fresh_samples` / `cache_samples` and `oldest_sample_at` (say how old the cached samples are); cited sources in `external_sources` with how many samples cited them. |
-| `seocli:delete_account` | `confirm` (default false) | free | **Destructive request.** Without `confirm` nothing is written: `will_delete` and `will_keep` list the data categories (clients and their history, operations, balance, login identity with the email; the credit ledger is kept 10 years under a pseudonymous id). With `confirm: true` the request is registered (`requested`, `request_id`, `requested_at`, `within_days` 30) and the seocli team is notified; the deletion itself is done by the team, not instantly. Repeating returns the same open request. Allowed also for pending accounts. |
+| `seocli:delete_account` | `confirm` (default false) | free | **Destructive request.** Without `confirm` nothing is written: `will_delete` and `will_keep` list the data categories (clients and their history, operations, balance, login identity with the email; the credit ledger is kept 10 years under a pseudonymous id). With `confirm: true` the request is registered (`requested`, `request_id`, `requested_at`, `within_days` 30) and the seocli team is notified; the deletion itself is done by the team, not instantly; the user receives a receipt by email (login address) and another email when the deletion is complete. Repeating returns the same open request and sends no second receipt. Allowed also for pending accounts. |
 
 Price-list codes today: `serp_queued`, `serp_live`, `geo`, `keyword_research`, `page_crawl`,
 `page_crawl_rendered`, `html_check`, `pagespeed`, `search_console`, `analytics`. Always read the live
@@ -52,4 +52,4 @@ plainly when asked; do not accept pasted exports as a substitute data source in 
 
 ## Sources
 
-- seocli-api v0.10.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-02.
+- seocli-api v0.11.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-02.
