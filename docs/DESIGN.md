@@ -767,7 +767,7 @@ These sentences are pinned (linted, verbatim) in every persona and every flow:
 - **NO-SPEND:** "You have no seocli tools. Data requests go to NEEDS; the lead decides, prices and
   runs them."
 
-Destructive actions (`seocli:manage_clients` with `delete` (now), `seocli:delete_account` (E3.5))
+Destructive actions (`seocli:manage_clients` with `delete`, `seocli:delete_account` (a request the team executes))
 run only on an explicit user request in the current turn, after restating what will be deleted.
 
 ### 7.5 Errors
