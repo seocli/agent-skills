@@ -26,6 +26,9 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 2. This version is checklist-and-questions only. The user reads the platform screens and states answers
    in the conversation. Pasted exports and screenshots are not accepted as data.
 3. Merchant Center price benchmarks are never shown now; later only from the client's own account.
+   Public Google Shopping results (`seocli:check_shopping`, `seocli:check_shopping_offers`, 3 credits each) are
+   available for any retailer: market prices, stores and the site's price gap. They are not the client's feed,
+   disapprovals or account data; the lead may run them for the feed audit and pass the result in the pack.
 4. No web search and no invented benchmarks, scores or amounts. The only web read is the client's own site through `site-profile`.
 
 ## Cost

@@ -32,7 +32,7 @@ video intents come from the SERP.
 
 - Step A, query words: brand or "login" = navigational; buy, price, quote, hire, "near me" = transactional;
   best, vs, review, alternatives = commercial investigation; what, why, how, guide = informational.
-- Step B, SERP evidence overrides step A: product and category pages or shopping units = transactional;
+- Step B, SERP evidence overrides step A: product and category pages or shopping units = transactional (`seocli:check_shopping` shows who sells and at what price);
   listicles and comparisons = commercial; guides, forums, videos, People Also Ask = informational;
   the brand's own sitelinks first = navigational; a map pack = local; no clear majority = "mixed".
 - Store label, confidence 0-1, evidence (features and type counts), date. Query-only classifiers
