@@ -40,7 +40,9 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
    general terms only; any benchmark from a Merchant Center account would only ever come from the
    client's own account. Public Google Shopping results are different: `seocli:check_shopping` (market prices,
    stores, where a site appears) and `seocli:check_shopping_offers` (sellers of one product, price gap)
-   work for any retailer, 3 credits each; they are not Merchant Center data.
+   work for any retailer, 3 credits each; they are not Merchant Center data. For a client, read its
+   Shopping history first (`seocli:get_visibility_history` with `kind` `shopping`, free) and reuse the
+   `product_id` already analysed instead of searching again (`seocli-tools`, heuristics).
 
 ## Cost
 

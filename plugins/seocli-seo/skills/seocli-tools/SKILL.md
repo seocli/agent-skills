@@ -75,6 +75,17 @@ results into findings and recommendations.
   positions with the axis inverted so 1 is at the top; GEO rates in % with the interval as a band),
   then comment the `changes` in two or three lines. Text tables only when charts are not
   available. `[H]`
+- **Read the client's history before a Shopping search.** For a question about a client's product
+  or prices on Google Shopping ("is the client expensive on X?"), call
+  `seocli:get_visibility_history` with `kind` `shopping` first (free): it lists the products already
+  analysed for that client, with `product_id` and the title in `external_sources`. If the product
+  is there, call `seocli:check_shopping_offers` with that `product_id` (free while the 24 h cache
+  lasts) instead of searching again; a new keyword search can land on a different product page.
+  Search with `seocli:check_shopping` only when the product is not in the history. Never rely on
+  an earlier conversation remembering the id. `[H]`
+- **Save the store name in the client.** When the client's store name on Google Shopping does not
+  contain its domain, save it once with `seocli:manage_clients` `set_seller_name`; every Shopping
+  check of the client then uses it, and the answer's `seller_name` confirms it. `[H]`
 - To rebill clients or answer "how much did I spend on X", read `summary[].charged` from
   `seocli:list_credit_movements` for the period (free); never add up reservations, which include
   open operations and refunded parts. `[H]`
