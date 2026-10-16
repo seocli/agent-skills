@@ -14,7 +14,9 @@ conversion tracking, feed health, policies, pacing, Google's recommendations, re
 Search Console and GA4 semantics, `technical-seo` for landing-page speed and indexing, and
 `methodology` for the finding and recommendation format.
 
-**Data availability.** The account data tools (Google Ads, Merchant Center) are not available yet: a
+**Data availability.** The account data tools (Google Ads, Merchant Center) are not available yet (public Google Shopping
+results are: `seocli:check_shopping` and `seocli:check_shopping_offers` give market prices, stores and a site's
+price gap for any retailer, but say nothing about the client's feed or account; the lead runs them): a
 post-launch server epic will add them, read-only. Today this skill gives method, checklists with
 thresholds, triage tables and questions. Do not request CSV or other exports as a data source; numbers
 the user states in conversation are `user_supplied`, unverified, and labelled so. Never invent a

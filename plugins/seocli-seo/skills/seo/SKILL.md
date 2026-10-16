@@ -35,16 +35,18 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
    those words with the plain capability name, and never replace it with web search, memory or
    invented figures. Then ask (AskUserQuestion): "Continue with what exists (Recommended)", naming it,
    or "Stop here".
-5. Data about Google Ads, Merchant Center and Meta Ads cannot be read in this version, and pasted
+5. Data from accounts (Google Ads, Merchant Center, Meta Ads) cannot be read in this version, and pasted
    exports are not accepted as a data source. Methodology questions about them can be answered in
    general terms only; any benchmark from a Merchant Center account would only ever come from the
-   client's own account.
+   client's own account. Public Google Shopping results are different: `seocli:check_shopping` (market prices,
+   stores, where a site appears) and `seocli:check_shopping_offers` (sellers of one product, price gap)
+   work for any retailer, 3 credits each; they are not Merchant Center data.
 
 ## Cost
 
 - Free now: the site profile (web fetch of the client's public pages, 0 credits), the domain KB (Claude tokens only, `/seocli-seo:kb`), `seocli:get_status`, `seocli:manage_clients`, `seocli:get_credit_balance`,
   `seocli:list_credit_movements`, `seocli:get_price_list`, `seocli:get_operation`. None of them spends credits.
-- Paid tools (today `seocli:check_serp`): follow `seocli-tools` rule 4-9 without exceptions:
+- Paid tools (today `seocli:check_serp`, `seocli:check_geo`, `seocli:check_shopping`, `seocli:check_shopping_offers`): follow `seocli-tools` rule 4-9 without exceptions:
   1. read the price list once per session;
   2. show the plan total as "Estimate: N credits (price list vN)" every time;
   3. ask for the explicit yes with AskUserQuestion ("Run, estimate N credits (Recommended)" / "Reduce
