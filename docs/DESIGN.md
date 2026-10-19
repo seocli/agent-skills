@@ -454,6 +454,33 @@ hits shown with date. `seocli:find_competitors` and `seocli:compare_competitor` 
 seo-analyst ranks and maps keyword -> page; content-strategist writes briefs (intent, competitor
 table, gaps, outline, information gain, internal links from the client's real URLs only).
 
+**Site workflows (E5.4, decided 2026-10-19).** The keyword workflows of the old seocli
+(`.seocli/agents/` competitor-keyword-gap, topic-cluster-mapper, keyword-strategist,
+keyword-difficulty-proxy; `.seocli/commands/` striking, calendar; `keyword_research.rs`) become part
+of this skill. No server code beyond the tools named here; the score moves to the server only if
+the manual test shows unreliable numbers.
+
+- **Reliability rules** (from `search-analytics/references/keyword-intent-serp.md`): every figure
+  carries its `source`; volume is a range when sources disagree; a missing figure is `unknown`,
+  never 0; intent has a confidence and SERP evidence beats query wording; a cluster needs shared
+  top-10 URLs. One score formula, written in the skill and computed with code execution where the
+  client has it (the old project had five that disagreed).
+- **Striking distance** (E7.4): Search Console queries at positions 11-20 with impressions above a
+  threshold (default 50) -> landing page per query -> concrete action for the top 3 (on-page, meta,
+  content, internal links).
+- **Topic clusters** (E7.4): top 200 queries with impressions > 100 -> semantic groups -> queries of
+  the top 30 pages -> missing pillars -> `seocli:check_serp` on 3-5 pillar candidates (skip SERPs
+  dominated by Shopping or Maps) -> pillar/cluster tree with slugs and anchors. No pillar without
+  impressions.
+- **Competitor gap** (E5.3, E7.4): the client's Search Console queries (impressions > 50) plus
+  `seocli:compare_competitor` per competitor -> four buckets: pure gap (competitor top 10, client
+  not in top 100), overlap (both top 20, competitor ahead), client advantage, shared top 3. Only
+  intents that fit the client's business.
+- **Later sources:** search trends (E12.5) add a trend factor to the score; Ads volumes (E12.6) give
+  the second figure of the volume range; domain authority (E12.2) enables a difficulty proxy from
+  the SERP top 10 (mean authority, adjusted for giant brands, SERP features and domain diversity),
+  always labelled as a proxy.
+
 ### 5.8 `/seocli-seo:geo`
 
 - Analyst path: build or reuse a versioned prompt/keyword set; price per D1; `seocli:check_geo`
