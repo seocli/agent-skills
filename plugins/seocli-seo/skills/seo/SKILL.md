@@ -91,7 +91,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 | delete my account and data (GDPR) | `seocli:delete_account` (free): show what is deleted and kept, confirm with AskUserQuestion, then request | immediate self-service deletion later |
 | presence in Google's AI Overview and in ChatGPT, Gemini, Perplexity, Claude | `seocli:check_geo` with `engines` and a `question` you propose (paid per sample and engine, background, estimate first) | history and charts later |
 | Search Console or GA4 | not available yet (`seocli:get_search_console_data` (E7.4), `seocli:get_analytics_data` (E7.5)) | after the Google data milestone |
-| what changed lately | not available yet (`seocli:get_summary` (E4.3)) | after the summary milestone |
+| what changed lately for one or all clients | `seocli:get_summary` (free): problems by severity, improvements, account problems; then `seocli:get_visibility_history` for the charts | Search Console, GA4 and crawl signals later |
 | paid campaigns audit | checklist and questions only (`/seocli-seo:ads-audit`), no account data | a later server epic |
 | sector knowledge (glossary, regulations, calendar, audience questions) | `/seocli-seo:kb build|update|show|list`, 0 credits | richer topic maps for briefs |
 | a decision or trade-off | `/seocli-seo:strategy`, started by the user; works on facts you give and free data, 0 credits | richer packs as tools arrive |
