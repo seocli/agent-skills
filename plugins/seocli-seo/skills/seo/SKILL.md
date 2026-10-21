@@ -87,11 +87,11 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 | one page in this repository | local review of files you point at (`/seocli-seo:page`), no credits | server HTML check (`seocli:check_page_html` (E6.7)) |
 | keywords, briefs, clusters | not available yet (`/seocli-seo:keywords`, `seocli:research_keywords` (E5.1)) | after the keyword milestone |
 | SERP positions for 1-10 keywords | `seocli:check_serp` (paid, estimate first: rules below) | cache and history reads in later releases |
-| how positions and AI citations changed for a client | `seocli:get_visibility_history` (free), drawn as charts | monitors (scheduled checks) later |
+| how positions and AI citations changed for a client | `seocli:get_visibility_history` (free), drawn as charts | scheduled checks: `seocli:manage_monitors` |
 | delete my account and data (GDPR) | `seocli:delete_account` (free): show what is deleted and kept, confirm with AskUserQuestion, then request | immediate self-service deletion later |
 | presence in Google's AI Overview and in ChatGPT, Gemini, Perplexity, Claude | `seocli:check_geo` with `engines` and a `question` you propose (paid per sample and engine, background, estimate first) | history and charts later |
 | Search Console or GA4 | not available yet (`seocli:get_search_console_data` (E7.4), `seocli:get_analytics_data` (E7.5)) | after the Google data milestone |
-| what changed lately | not available yet (`seocli:get_summary` (E4.3)) | after the monitors milestone |
+| what changed lately | not available yet (`seocli:get_summary` (E4.3)) | after the summary milestone |
 | paid campaigns audit | checklist and questions only (`/seocli-seo:ads-audit`), no account data | a later server epic |
 | sector knowledge (glossary, regulations, calendar, audience questions) | `/seocli-seo:kb build|update|show|list`, 0 credits | richer topic maps for briefs |
 | a decision or trade-off | `/seocli-seo:strategy`, started by the user; works on facts you give and free data, 0 credits | richer packs as tools arrive |
