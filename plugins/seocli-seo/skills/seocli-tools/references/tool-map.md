@@ -1,10 +1,10 @@
 last_verified: 2026-10-16
 volatile: true
 
-# Tool map (server v0.13.0)
+# Tool map (server v0.14.0)
 
 The machine-readable copy is `tests/contract/tools.json` in the plugin repository; the lint keeps the
-two consistent with every file of the plugin. Status "now" means exposed by server v0.13.0.
+two consistent with every file of the plugin. Status "now" means exposed by server v0.14.0.
 
 ## Available now
 
@@ -55,4 +55,4 @@ or for backlinks (planned after launch, E12.1). Say so plainly when asked; do no
 
 ## Sources
 
-- seocli-api v0.13.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-15.
+- seocli-api v0.14.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-10-21.
