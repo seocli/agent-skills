@@ -42,7 +42,7 @@ Written as defaults, not re-fetched. Verify against the platform's current docum
 ## Drift signals `[H]`
 
 Plugin convention for comparing a baseline with a new capture (`seocli:create_baseline` (E7.7),
-`seocli:manage_monitors` (E4.1)). Signal codes belong to the server; severities below are defaults.
+`seocli:manage_monitors`). Signal codes belong to the server; severities below are defaults.
 - Critical: structured data removed entirely, canonical changed or removed, `noindex` added, h1 removed,
   title removed, status moved from 2xx to 4xx or 5xx.
 - Warning: title or description changed, a Core Web Vitals metric more than 20% worse, social tags removed,

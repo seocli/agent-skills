@@ -86,6 +86,13 @@ results into findings and recommendations.
 - **Save the store name in the client.** When the client's store name on Google Shopping does not
   contain its domain, save it once with `seocli:manage_clients` `set_seller_name`; every Shopping
   check of the client then uses it, and the answer's `seller_name` confirms it. `[H]`
+- **Monitors.** After a check of a client (`check_serp`, `check_geo`, `check_shopping`) you may offer
+  a monitor with `seocli:manage_monitors` `create`; never create one without the yes of the user. Show the
+  `estimate` (`per_run`, `monthly`) and `account_monthly_total` first, with the frequency: SERP and
+  Shopping `daily` or `weekly`, GEO `weekly` or `monthly`. Prefer `weekly`; a monitor costs credits on
+  every run. Tell the user if `over_included_dose` is true. When listing monitors, read `last_run.outcome`
+  and `suspension`: `credits_exhausted` restarts by itself once credits return; `over_limit` needs a new
+  monitor with a higher `max_credits` (show the new estimate first). Confirm before `delete` (irreversible). `[H]`
 - To rebill clients or answer "how much did I spend on X", read `summary[].charged` from
   `seocli:list_credit_movements` for the period (free); never add up reservations, which include
   open operations and refunded parts. `[H]`

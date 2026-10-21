@@ -1,5 +1,5 @@
 {
-  "server": "seocli-api v0.13.0",
+  "server": "seocli-api v0.14.0",
   "available": [
     "get_status",
     "manage_clients",
@@ -11,11 +11,11 @@
     "check_geo",
     "check_shopping",
     "check_shopping_offers",
+    "manage_monitors",
     "get_visibility_history",
     "delete_account"
   ],
   "planned": {
-    "manage_monitors": "E4.1",
     "get_summary": "E4.3",
     "research_keywords": "E5.1",
     "select_keywords": "E5.2",
