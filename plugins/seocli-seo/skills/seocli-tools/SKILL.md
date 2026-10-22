@@ -93,6 +93,10 @@ results into findings and recommendations.
   every run. Tell the user if `over_included_dose` is true. When listing monitors, read `last_run.outcome`
   and `suspension`: `credits_exhausted` restarts by itself once credits return; `over_limit` needs a new
   monitor with a higher `max_credits` (show the new estimate first). Confirm before `delete` (irreversible). `[H]`
+- **What changed.** For "what changed this week" or "for my clients", call `seocli:get_summary` first (free)
+  and report problems before improvements, the account group last, with the dates of the answer; then open
+  `seocli:get_visibility_history` for the keywords worth a chart. Signals exist only for checks saved since the
+  summary release: an empty summary with older history means no new saved checks, not "nothing changed". `[H]`
 - To rebill clients or answer "how much did I spend on X", read `summary[].charged` from
   `seocli:list_credit_movements` for the period (free); never add up reservations, which include
   open operations and refunded parts. `[H]`
