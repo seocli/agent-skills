@@ -97,8 +97,12 @@ results into findings and recommendations.
   `action` `status` (free). If `connected` is false, give the user the `dashboard_url`: the connection is
   made there, once, with Google's consent; never ask for passwords, codes or tokens in the chat. Say which
   `permissions` are granted: with only one of `search_console` and `analytics`, the other data cannot be
-  read until the user connects again from the same page. `available` false means this server has no
-  Google connection: say so, do not retry. `[H]`
+  read until the user connects again from the same page. `needs_reconnect` true means Google no longer
+  gives access: give the `dashboard_url` to connect again. `available` false means this server has no
+  Google connection: say so, do not retry. To disconnect, ask the user first and call `manage_google`
+  `disconnect` only on their yes; after it no Google data is read. If `revoked` is false, the tokens are
+  already deleted but Google did not confirm: give the `google_permissions_url` so the user removes the
+  access from the Google account. `[H]`
 - **What changed.** For "what changed this week" or "for my clients", call `seocli:get_summary` first (free)
   and report problems before improvements, the account group last, with the dates of the answer; then open
   `seocli:get_visibility_history` for the keywords worth a chart. Signals exist only for checks saved since the
