@@ -93,6 +93,12 @@ results into findings and recommendations.
   every run. Tell the user if `over_included_dose` is true. When listing monitors, read `last_run.outcome`
   and `suspension`: `credits_exhausted` restarts by itself once credits return; `over_limit` needs a new
   monitor with a higher `max_credits` (show the new estimate first). Confirm before `delete` (irreversible). `[H]`
+- **Google connection.** Before promising Search Console or GA4 data, call `seocli:manage_google` with
+  `action` `status` (free). If `connected` is false, give the user the `dashboard_url`: the connection is
+  made there, once, with Google's consent; never ask for passwords, codes or tokens in the chat. Say which
+  `permissions` are granted: with only one of `search_console` and `analytics`, the other data cannot be
+  read until the user connects again from the same page. `available` false means this server has no
+  Google connection: say so, do not retry. `[H]`
 - **What changed.** For "what changed this week" or "for my clients", call `seocli:get_summary` first (free)
   and report problems before improvements, the account group last, with the dates of the answer; then open
   `seocli:get_visibility_history` for the keywords worth a chart. Signals exist only for checks saved since the
