@@ -1,5 +1,5 @@
 {
-  "server": "seocli-api v0.17.0",
+  "server": "seocli-api v0.19.0",
   "available": [
     "get_status",
     "manage_clients",
