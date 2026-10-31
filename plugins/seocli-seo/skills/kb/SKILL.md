@@ -1,6 +1,6 @@
 ---
 name: kb
-description: Build, update, show or list the domain knowledge base - sector knowledge (glossary, entities, calendar, regulations, audience questions, sources, topic map) researched from the public web and kept at ~/.seocli/kb/<sector-slug>/ for later sessions. Use /seocli-seo:kb build|update|show|list [sector]; quick or deep. Uses no seocli credits.
+description: Build, update, show or list the domain knowledge base - sector knowledge (glossary, entities, calendar, regulations, audience questions, sources, topic map) researched from the public web and kept on seocli (manage_kb, every client) or at ~/.seocli/kb/<sector-slug>/ for later sessions; imports a local KB to seocli once. Use /seocli-seo:kb build|update|show|list [sector]; quick or deep. Uses no seocli credits.
 argument-hint: "build|update|show|list [sector]"
 disable-model-invocation: true
 allowed-tools: AskUserQuestion, WebFetch
@@ -21,13 +21,19 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 
 ## Availability
 
-1. `list` and `show` need only file reads. `build` and `update` need web search and fetch (`WebSearch`,
-   `WebFetch`) and permission to write under `~/.seocli/kb/`. Claude Code may ask for that permission; if
+1. **Mode** (`domain-kb` rule 1): call `seocli:manage_kb` `list` first (free). Tool present = server mode,
+   `writable` false = read-only (only `show` and `list`; say the Pro plan keeps it editable). No tool = local
+   mode under `~/.seocli/kb/`.
+2. `list` and `show` need only reads (server: `manage_kb`; local: files). `build` and `update` need web
+   search and fetch (`WebSearch`, `WebFetch`) and permission to write the drafts (server mode: under
+   `~/.seocli/kb-staging/`; local: under `~/.seocli/kb/`). Claude Code may ask for that permission; if
    researchers cannot write or fetch (background sub-agents surface their prompts in this session), say what
-   is blocked and ask: continue inline in this thread (Recommended) / stop.
-2. No seocli tool is called. A site profile is read only to name the sector; run `site-profile` for the
-   client's own site if no sector is given and `site-profile.md` is missing or older than 30 days.
-3. Without any web tool, `build` and `update` are unavailable: say so; `show` and `list` still work.
+   is blocked and ask: continue inline in this thread (Recommended) / stop. In claude.ai there are no
+   sub-agents: research and write inline, a few sources at a time.
+3. The only seocli tool is `manage_kb` (free). A site profile is read only to name the sector; run
+   `site-profile` for the client's own site if no sector is given and `site-profile.md` is missing or older
+   than 30 days.
+4. Without any web tool, `build` and `update` are unavailable: say so; `show` and `list` still work.
 
 ## Cost
 
@@ -39,11 +45,12 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 ## Steps
 
 1. **Sector.** Resolve the slug (`domain-kb` rule 1): from the argument, else from `site-profile.md` of the
-   selected client (business to sector). List existing slugs under `~/.seocli/kb/` first and propose a close
-   match before a new slug. Ask to confirm with AskUserQuestion (existing slug / proposed new slug / Other).
-2. **`list`.** For each sector directory: slug, entries and oldest `last_verified` from `index.md`, stale
-   count by `domain-kb` rule 8. One table. No spawns.
-3. **`show`.** Read `index.md`, print the catalog summary (counts per type, stale entries, confidence mix)
+   selected client (business to sector). List existing slugs first (server mode: `manage_kb` `list`; local: under
+   `~/.seocli/kb/`) and propose a close match before a new slug. In server mode run step 5 (Import) first
+   when it applies. Ask to confirm with AskUserQuestion (existing slug / proposed new slug / Other).
+2. **`list`.** For each sector (server: `manage_kb` `list`; local: directories): slug, size, entries and
+   oldest `last_verified` from `index.md`, stale count by `domain-kb` rule 8. One table. No spawns.
+3. **`show`.** Read `index.md` (server: `manage_kb` `read`), print the catalog summary (counts per type, stale entries, confidence mix)
    and the top of `topic-map.md`. Print a file or entry on request. No spawns.
 4. **`build`.** Existing KB: ask update instead (Recommended) / rebuild missing parts / stop. Then ask the
    depth with AskUserQuestion, tokens in each description: quick (Recommended), about 10 sources, 1
@@ -58,12 +65,23 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
    Read also (`index.md` if present), Output (summary and files written), Boundaries (write only under the
    path; sector knowledge only; no client data; `domain-kb` rules 5-9). Never put client names, domains or
    figures in a brief.
-5. **`update`.** Read `index.md`; select stale rows (60 days volatile, 180 stable); show the count and ask
+   Server mode: the brief path is `~/.seocli/kb-staging/<slug>/`; after the merge, write every file with
+   `manage_kb` `write`, then delete the staging folder. A `limit_exceeded` file is split or pruned before
+   writing again.
+5. **Import** (server mode, writable, Claude Code or Desktop only). If `~/.seocli/kb/` has sectors and
+   `~/.seocli/kb/.imported` is missing or older than a sector's newest file, list sectors and files and ask:
+   import now (Recommended) / not now. On yes, per sector: not on the server = write each file as it is
+   (same path); already on the server = merge like an `update` (read both `index.md`, add the local entries
+   that are missing with new ids in a free range, drop duplicates by title and source, rebuild `index.md`,
+   write the changed files). Files refused by seocli (`invalid_input`, `limit_exceeded`) are reported and
+   skipped. Then write the date into `~/.seocli/kb/.imported`; local files stay where they are and are not
+   used again. Report sectors, files written, entries merged, files skipped.
+6. **`update`.** Read `index.md`; select stale rows (60 days volatile, 180 stable); show the count and ask
    scope (all stale (Recommended) / volatile only / one file). Spawn one researcher with the ids to
    re-verify, or do up to 5 inline. Update `last_verified` only after the source was re-read.
-6. **Verify.** Read back `index.md`: every entry id has a row; no file over its size limit; no client
+7. **Verify.** Read back `index.md`: every entry id has a row; no file over its size limit; no client
    name or domain appears (search for the selected client's domain and name with Grep). Fix or report.
-7. **Researcher QUESTIONS.** Convert them to AskUserQuestion; do not guess.
+8. **Researcher QUESTIONS.** Convert them to AskUserQuestion; do not guess.
 
 ## Errors
 
@@ -74,7 +92,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 
 ## Output
 
-- One line: sector slug, verb, entries added or verified, stale entries left, files written (absolute paths).
+- One line: sector slug, verb, entries added or verified, stale entries left, files written (server mode: sector and paths; local: absolute paths).
 - Low-confidence entries and gaps, in two short lists; what `/seocli-seo:seo` and `/seocli-seo:strategy`
   will now use from the KB.
 - State "seocli credits: 0" and the Claude token estimate. Reply in the user's language; KB files are
