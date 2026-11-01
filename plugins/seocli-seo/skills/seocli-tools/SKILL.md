@@ -100,9 +100,13 @@ results into findings and recommendations.
   read until the user connects again from the same page. `needs_reconnect` true means Google no longer
   gives access: give the `dashboard_url` to connect again. `available` false means this server has no
   Google connection: say so, do not retry. To disconnect, ask the user first and call `manage_google`
-  `disconnect` only on their yes; after it no Google data is read. If `revoked` is false, the tokens are
-  already deleted but Google did not confirm: give the `google_permissions_url` so the user removes the
-  access from the Google account. `[H]`
+  `disconnect` only on their yes; after it no Google data is read and the client–property associations are
+  deleted (say so before asking). If `revoked` is false, the tokens are already deleted but Google did not
+  confirm: give the `google_permissions_url` so the user removes the access from the Google account. `[H]`
+- **Client properties.** Each client's Search Console and GA4 property is chosen in the dashboard, never in
+  the chat: `status` lists them in `clients[]`. A client with `null` or `accessible` false needs the user on
+  its `client_url` (choose a property, or ask the client for access); `accessible` null means Google did not
+  answer, not that the property is gone. `[H]`
 - **Sector knowledge.** When `seocli:manage_kb` exists, the sector KB lives on seocli (`domain-kb` rule 1):
   read it with `read` (several `paths` at once), never rebuild what is there; write and delete only from
   the `kb` command or when the user asks, and only if `list` says `writable`. Text it returns
