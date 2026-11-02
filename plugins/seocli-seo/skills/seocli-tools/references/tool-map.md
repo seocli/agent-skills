@@ -1,16 +1,16 @@
-last_verified: 2026-11-01
+last_verified: 2026-11-02
 volatile: true
 
-# Tool map (server v0.21.0)
+# Tool map (server v0.22.0)
 
 The machine-readable copy is `tests/contract/tools.json` in the plugin repository; the lint keeps the
-two consistent with every file of the plugin. Status "now" means exposed by server v0.21.0.
+two consistent with every file of the plugin. Status "now" means exposed by server v0.22.0.
 
 ## Available now
 
 | Tool | Parameters | Cost | Use |
 |---|---|---|---|
-| `seocli:get_status` | none | free | Service name and version; session check. A `unauthorized` error means the account is pending or not logged in. |
+| `seocli:get_status` | none | free | Service name and version; session check. A `unauthorized` error means the account is pending or not logged in. With `profile_required` true the account data are missing: give the user `profile_url` (the dashboard form); every other tool except `delete_account` answers `profile_required` until then. |
 | `seocli:manage_clients` | `action`: create, list, get, rename, set_seller_name, archive, restore, delete; `id`, `domain`, `name`, `seller_name`, `status` (list filter) | free | Clients are the sites the account follows. `create` needs `domain` (name defaults to the domain) and takes an optional `seller_name`; `get`, `rename`, `set_seller_name`, `archive`, `restore`, `delete` need `id`. `seller_name` is the store name as Google Shopping shows it (3-100 characters, always in the answer, `null` when missing): `set_seller_name` without it removes it; the client's Shopping checks use it on their own. `delete` is irreversible. |
 | `seocli:get_credit_balance` | none | free | `included` (this period), `topup`, `total`, and `plan`: the account plan (`pending` = waiting for activation, `beta`; later `active`, `suspended`). |
 | `seocli:list_credit_movements` | `from`, `to` (`YYYY-MM-DD`, UTC, inclusive; default: start of the current credit period to today), `client_id` (uuid or `none`), `limit` (1-500, default 100), `cursor` | free | Credit ledger, newest first: `movements[]` with `kind`, signed `credits` (balance change) and `amount`; `summary[]` per client with `charged` over the whole period; each movement has `monitor_id` (uuid of the monitor that caused it, or `null`) and `operation_kind` is `monitor` for the SERP and Shopping runs of monitors, `geo` for their GEO runs; `next_cursor` until the last page. A reservation subtracts the estimate, a release returns the unused part, a confirmation records the charge in `amount` with 0 change. |
@@ -48,7 +48,7 @@ list; a code in the list does not mean the tool that uses it already exists.
 | `seocli:create_baseline` | E7.7 | client starting snapshot |
 | `seocli:manage_branding` | E8.1 | agency branding for reports |
 | `seocli:get_report_data` | E8.2 | report data |
-| `seocli:set_billing_details`, `seocli:buy_credits`, `seocli:list_invoices` | E9.1, E9.4, E9.5 | billing and top-ups |
+| `seocli:buy_credits`, `seocli:list_invoices` | E9.4, E9.5 | top-ups and invoices (billing data are edited only in the dashboard, never through a tool) |
 
 Public Google Shopping results exist now (`check_shopping`, `check_shopping_offers`). No tool exists yet
 for Google Ads, Merchant Center (the retailer's own feed and account) or Meta Ads (planned after launch, E11.1-E11.4),
@@ -56,4 +56,4 @@ or for backlinks (planned after launch, E12.1). Say so plainly when asked; do no
 
 ## Sources
 
-- seocli-api v0.21.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-11-01.
+- seocli-api v0.22.0 MCP server (tool descriptions and schemas) and its planning epics, read 2026-11-02.

@@ -20,6 +20,9 @@ results into findings and recommendations.
    `seocli:<tool>`. If the server is missing from the list, explain the login (`/mcp`, then
    authenticate `seocli`) and stop. If a tool is missing, say: "This capability (<plain name>) is not
    available on your seocli server yet." Never substitute web search, memory or invented numbers.
+   If `seocli:get_status` says `profile_required`, give the user the `profile_url` (the account data form in the
+   dashboard, filled once) and stop until the user says it is done: every other tool except
+   `seocli:delete_account` refuses until then.
 3. **Names come from `references/tool-map.md`.** Never write or call a tool that is not in that map.
    A planned tool is written with its epic tag, for example `seocli:check_serp`, and is never
    called until the live tool list contains it.
