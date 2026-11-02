@@ -48,7 +48,7 @@ list; a code in the list does not mean the tool that uses it already exists.
 | `seocli:create_baseline` | E7.7 | client starting snapshot |
 | `seocli:manage_branding` | E8.1 | agency branding for reports |
 | `seocli:get_report_data` | E8.2 | report data |
-| `seocli:set_billing_details`, `seocli:buy_credits`, `seocli:list_invoices` | E9.1, E9.4, E9.5 | billing and top-ups |
+| `seocli:buy_credits`, `seocli:list_invoices` | E9.4, E9.5 | top-ups and invoices (billing data are edited only in the dashboard, never through a tool) |
 
 Public Google Shopping results exist now (`check_shopping`, `check_shopping_offers`). No tool exists yet
 for Google Ads, Merchant Center (the retailer's own feed and account) or Meta Ads (planned after launch, E11.1-E11.4),

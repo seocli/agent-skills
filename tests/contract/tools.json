@@ -35,7 +35,6 @@
     "create_baseline": "E7.7",
     "manage_branding": "E8.1",
     "get_report_data": "E8.2",
-    "set_billing_details": "E9.1",
     "buy_credits": "E9.4",
     "list_invoices": "E9.5",
     "compress_images": "E6.10"
