@@ -88,7 +88,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 | keywords, briefs, clusters | not available yet (`/seocli-seo:keywords`, `seocli:research_keywords` (E5.1)) | after the keyword milestone |
 | SERP positions for 1-10 keywords | `seocli:check_serp` (paid, estimate first: rules below) | cache and history reads in later releases |
 | how positions and AI citations changed for a client | `seocli:get_visibility_history` (free), drawn as charts | scheduled checks: `seocli:manage_monitors` |
-| delete my account and data (GDPR) | `seocli:delete_account` (free): show what is deleted and kept, confirm with AskUserQuestion, then request | immediate self-service deletion later |
+| delete my account and data (GDPR) | no tool: the user requests it in the seocli dashboard, page Account, section «Zona pericolosa» (writes CANCELLA, then confirms from the email within 72 hours) | — |
 | presence in Google's AI Overview and in ChatGPT, Gemini, Perplexity, Claude | `seocli:check_geo` with `engines` and a `question` you propose (paid per sample and engine, background, estimate first) | history and charts later |
 | Search Console or GA4 | connection status with `seocli:manage_google` `status` (free; if not connected, the dashboard page to connect); the data tools are not available yet (`seocli:get_search_console_data` (E7.4), `seocli:get_analytics_data` (E7.5)) | after the Google data milestone |
 | what changed lately for one or all clients | `seocli:get_summary` (free): problems by severity, improvements, account problems; then `seocli:get_visibility_history` for the charts | Search Console, GA4 and crawl signals later |
