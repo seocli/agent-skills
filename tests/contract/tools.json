@@ -15,7 +15,8 @@
     "get_visibility_history",
     "get_summary",
     "manage_google",
-    "manage_kb"
+    "manage_kb",
+    "get_search_console_data"
   ],
   "planned": {
     "research_keywords": "E5.1",
@@ -27,7 +28,6 @@
     "check_performance": "E6.5",
     "recheck_urls": "E6.6",
     "check_page_html": "E6.7",
-    "get_search_console_data": "E7.4",
     "find_cannibalization": "E7.4",
     "inspect_indexing": "E7.4",
     "get_analytics_data": "E7.5",

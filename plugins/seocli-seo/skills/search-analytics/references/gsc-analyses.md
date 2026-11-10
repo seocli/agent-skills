@@ -3,8 +3,9 @@ volatile: true
 
 # Search Console analyses
 
-Thresholds are `[H]` defaults. Fetch with `seocli:get_search_console_data` (E7.4) once it exists;
-cannibalisation has a planned tool, `seocli:find_cannibalization` (E7.4). Until then, ask for an export.
+Thresholds are `[H]` defaults. Fetch rows with `seocli:get_search_console_data` (free; `query_page` for
+(query, page) pairs, `compare` for period changes, totals from its `totals`). Cannibalisation has a planned
+tool, `seocli:find_cannibalization` (E7.4); until then group the `query_page` rows yourself.
 
 ## Striking distance
 
