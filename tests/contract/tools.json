@@ -16,7 +16,9 @@
     "get_summary",
     "manage_google",
     "manage_kb",
-    "get_search_console_data"
+    "get_search_console_data",
+    "find_cannibalization",
+    "inspect_indexing"
   ],
   "planned": {
     "research_keywords": "E5.1",
@@ -28,8 +30,6 @@
     "check_performance": "E6.5",
     "recheck_urls": "E6.6",
     "check_page_html": "E6.7",
-    "find_cannibalization": "E7.4",
-    "inspect_indexing": "E7.4",
     "get_analytics_data": "E7.5",
     "create_baseline": "E7.7",
     "manage_branding": "E8.1",

@@ -24,4 +24,5 @@ The two `limit_exceeded` cases are told apart by the extra fields: `max_credits`
 ## Sources
 
 - seocli-api v0.4.0 error type definitions, read 2026-10-02.
-- seocli-api `get_search_console_data` errors with `code` and `dashboard_url` (story 7.4), read 2026-11-09.
+- seocli-api `get_search_console_data` errors with `code` and `dashboard_url` (story 7.4), read 2026-11-09; the same for
+  `find_cannibalization` and `inspect_indexing`, read 2026-11-10.

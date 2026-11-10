@@ -85,7 +85,7 @@ Profile and location pages. Tags: `[G]` Google primary source (id = `references/
 - At most two facets indexable at once, only combinations with search demand `[H]`.
 - Data requests (lead executes): `seocli:crawl_site` (E6.1), `seocli:get_audit_issues` (E6.3),
   `seocli:check_page_html` (E6.7), `seocli:check_performance` (E6.5), `seocli:recheck_urls` (E6.6),
-  `seocli:inspect_indexing` (E7.4). Map each audit issue to category, severity, fix and the check that
+  `seocli:inspect_indexing` (available, free, Google quota 2,000 URLs a day per site). Map each audit issue to category, severity, fix and the check that
   proves it; never promise a ranking effect, name the leading indicator instead.
 
 ## Do not recommend
