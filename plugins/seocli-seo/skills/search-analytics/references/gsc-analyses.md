@@ -4,8 +4,8 @@ volatile: true
 # Search Console analyses
 
 Thresholds are `[H]` defaults. Fetch rows with `seocli:get_search_console_data` (free; `query_page` for
-(query, page) pairs, `compare` for period changes, totals from its `totals`). Cannibalisation has a planned
-tool, `seocli:find_cannibalization` (E7.4); until then group the `query_page` rows yourself.
+(query, page) pairs, `compare` for period changes, totals from its `totals`). Cannibalisation comes ready
+from `seocli:find_cannibalization` (free, same read and cache as `query_page`; see below).
 
 ## Striking distance
 
@@ -38,6 +38,12 @@ informational/transactional SERP can justify two URLs; a double listing can be h
 combined clicks vs the best single URL. Actions: consolidate with 301 and updated internal links,
 differentiate intents, canonicalise duplicates, fix anchors, or accept. Query rows are truncated and
 partly hidden, so some competition is invisible.
+
+With the tool: `seocli:find_cannibalization` with `from` 90 days back and `min_second_share` 0.2. It splits on
+**clicks** (`share` per page, `excluded_by_threshold` for the noise it dropped), not impressions; a query with
+impressions but few clicks never reaches it, so for that case group the `query_page` rows of
+`seocli:get_search_console_data` by impressions yourself. `source_truncated` true = the result covers the first
+25,000 rows only: say so.
 
 ## Decay
 

@@ -64,7 +64,7 @@ to override per client, `[U]` reported, not confirmed.
 - `[H]` Typical duplicates: http/https, www/apex, trailing slash, case, tracking parameters, sort
   parameters, print pages, session IDs, faceted URLs. Fix at one normalisation layer (redirects), then
   align canonical, sitemap and internal links to the same URL.
-- `[H]` Compare declared and Google-selected canonical through `seocli:inspect_indexing` (E7.4).
+- `[H]` Compare declared and Google-selected canonical through `seocli:inspect_indexing` (`google_canonical` vs `user_canonical`).
 
 ## Sitemaps
 
