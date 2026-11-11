@@ -1,4 +1,4 @@
-last_verified: 2026-10-02
+last_verified: 2026-11-11
 volatile: false
 
 # Data foundations and reconciliation
@@ -28,7 +28,8 @@ deliverable carries source, date range, filter, row count and caveat; a number w
 - Engaged session, engagement rate, bounce rate: Rule 10 `[G]`. Bounce here is not the old
   Universal Analytics bounce.
 - "Organic Search" channel includes every search engine; filter to source google, medium organic when
-  comparing with Search Console `[H]`.
+  comparing with Search Console `[H]`. `seocli:get_analytics_data` reads the whole "Organic Search"
+  channel (all engines), so its ratio to Search Console clicks sits a little above the google-only one.
 - Landing page plus session source/medium is the right pair for SEO. GA4 gives no organic keyword;
   queries come only from Search Console at page level `[H]`.
 - Attribution is last non-direct click, so organic gets credit only as the last non-direct touch and

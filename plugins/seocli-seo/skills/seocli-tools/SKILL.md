@@ -76,7 +76,9 @@ results into findings and recommendations.
 - **Draw time series.** Claude and other clients render charts in the answer: show every
   `seocli:get_visibility_history` series as a line chart from its `chart` hints (title, unit; SERP
   positions with the axis inverted so 1 is at the top; GEO rates in % with the interval as a band),
-  then comment the `changes` in two or three lines. Text tables only when charts are not
+  then comment the `changes` in two or three lines. `seocli:get_analytics_data` with `dimension`
+  `date` gives one row per day: draw sessions (or conversions) as a line chart, the previous period
+  from `compare` as a dashed line. Text tables only when charts are not
   available. `[H]`
 - **Read the client's history before a Shopping search.** For a question about a client's product
   or prices on Google Shopping ("is the client expensive on X?"), call
