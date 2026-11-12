@@ -4,7 +4,9 @@ volatile: true
 # Search Console analyses
 
 Thresholds are `[H]` defaults. Fetch rows with `seocli:get_search_console_data` (free; `query_page` for
-(query, page) pairs, `compare` for period changes, totals from its `totals`). Cannibalisation comes ready
+(query, page) pairs, `date` for one row per day, `compare` for period changes, totals from its
+`totals`). Daily series for one query or page (position stability, decay, update correlation): `date`
+with `query_contains` or `page_contains`. Cannibalisation comes ready
 from `seocli:find_cannibalization` (free, same read and cache as `query_page`; see below).
 
 ## Striking distance
