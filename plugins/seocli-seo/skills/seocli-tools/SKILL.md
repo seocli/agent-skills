@@ -81,8 +81,10 @@ results into findings and recommendations.
   clicks (or conversions, impressions) as a line chart, the previous period from `compare` as a
   dashed line; ask for a whole number of weeks (28, 56 or 91 days) so each day faces the same
   weekday of the previous period. Search Console position goes on its own chart with the axis
-  inverted, and a day with null position is a gap, never zero. Text tables only when charts are not
-  available. `[H]`
+  inverted, and a day with null position is a gap, never zero. Where neither the client nor a
+  chart tool can draw (a plain terminal), never print one row per day: summarise by week up to 13
+  weeks, by month beyond (partial weeks or months marked), with one sparkline per measure
+  (▁▂▃▄▅▆▇█), and give the daily table only when the user asks for it. `[H]`
 - **Read the client's history before a Shopping search.** For a question about a client's product
   or prices on Google Shopping ("is the client expensive on X?"), call
   `seocli:get_visibility_history` with `kind` `shopping` first (free): it lists the products already
