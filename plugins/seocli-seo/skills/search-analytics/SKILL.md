@@ -64,6 +64,13 @@ Defaults the client may override; thresholds are in `references/gsc-analyses.md`
 
 - Reconcile first: GA4 organic landing sessions over Search Console web clicks, weekly; a step change
   above about 20% means tracking, consent or tagging, not SEO `[H]`.
+- Weekly signal drops (`get_summary`, from a `google_data` monitor): the last week ends 3 days before
+  today and is compared with the week before; read the dates in `period` and `previous_period`, never
+  assume them. Those last days are not final in Search Console and GA4, so a later read can differ.
+  The threshold is a fall above 20%, with no minimum volume: on small numbers ask for the daily series
+  (`get_search_console_data`, `get_analytics_data`) before calling it a trend. `page_deindexed` is a
+  candidate (impressions gone) confirmed by Google's URL inspection: quote `reason` and verify with
+  `seocli:inspect_indexing` before a fix `[H]`
 - Analyse position at (query, page) grain over 90 days; never average CTR or position, recompute from sums `[H]`.
 - Intent: start from query words, let the SERP decide; label mixed SERPs "mixed" `[H]`.
 - Same page for two keywords when roughly 3-4 of the top 10 URLs are shared `[H]`; confirm on 20 pairs.
