@@ -102,7 +102,7 @@ results into findings and recommendations.
   Shopping `daily` or `weekly`, GEO `weekly` or `monthly`. Prefer `weekly`; a monitor costs credits on
   every run. Tell the user if `over_included_dose` is true. When listing monitors, read `last_run.outcome`
   and `suspension`: `credits_exhausted` restarts by itself once credits return; `over_limit` needs a new
-  monitor with a higher `max_credits` (show the new estimate first). Confirm before `delete` (irreversible). `[H]`
+  monitor with a higher `max_credits` (show the new estimate first); `google_link` restarts by itself when Google is connected again or a property is associated (`resume` works too). A `google_data` monitor (daily, free, one per client, needs an associated Google property) feeds the drop signals of `get_summary`; offer it after `manage_google` shows a connected account. Confirm before `delete` (irreversible). `[H]`
 - **Google connection.** Before promising Search Console or GA4 data, call `seocli:manage_google` with
   `action` `status` (free). If `connected` is false, give the user the `dashboard_url`: the connection is
   made there, once, with Google's consent; never ask for passwords, codes or tokens in the chat. Say which
