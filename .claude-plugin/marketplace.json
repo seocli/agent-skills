@@ -1,12 +1,12 @@
 {
   "name": "seocli",
   "owner": { "name": "seocli", "url": "https://github.com/seocli" },
-  "metadata": { "description": "seocli plugins for Claude Code", "version": "0.3.0" },
+  "metadata": { "description": "seocli plugins for Claude Code", "version": "0.4.0" },
   "plugins": [
     {
       "name": "seocli-seo",
       "source": "./plugins/seocli-seo",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "category": "seo",
       "description": "SEO, GEO and paid-media specialist personas, a strategy round-table and the seocli MCP server."
     }
