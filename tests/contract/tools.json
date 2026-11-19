@@ -19,10 +19,11 @@
     "get_search_console_data",
     "find_cannibalization",
     "inspect_indexing",
-    "get_analytics_data"
+    "get_analytics_data",
+    "research_keywords",
+    "check_keyword_difficulty"
   ],
   "planned": {
-    "research_keywords": "E5.1",
     "select_keywords": "E5.2",
     "find_competitors": "E5.3",
     "compare_competitor": "E5.3",

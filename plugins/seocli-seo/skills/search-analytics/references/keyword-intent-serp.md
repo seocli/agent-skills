@@ -3,9 +3,9 @@ volatile: false
 
 # Keywords, intent, SERP overlap, SERP features, competitor gap
 
-All thresholds are `[H]` defaults: validate on the client's data before quoting them. Data tools are
-planned: `seocli:research_keywords` (E5.1), `seocli:select_keywords` (E5.2), `seocli:check_serp`,
-`seocli:find_competitors` (E5.3).
+All thresholds are `[H]` defaults: validate on the client's data before quoting them. Data tools now:
+`seocli:research_keywords` (free), `seocli:check_keyword_difficulty` (40 credits per request),
+`seocli:check_serp`. Planned: `seocli:select_keywords` (E5.2), `seocli:find_competitors` (E5.3).
 
 ## Keyword method
 
@@ -20,6 +20,14 @@ planned: `seocli:research_keywords` (E5.1), `seocli:select_keywords` (E5.2), `se
 5. Classify intent, map keyword to page (existing, new, or "no page": the SERP wants another format).
 6. Size and prioritise (see `forecasting-prioritisation.md`).
 7. Write the plan: owner, target URL, intent, volume range, current and target position, review date.
+
+Variant rows. `seocli:research_keywords` returns close variants (singular/plural, "canna pesca" / "canne
+di pesca") as separate rows with the same volume and the same 12-month series. Before presenting or
+counting, merge rows with equal `avg_monthly_searches` and an equal `monthly` series into one group
+(show the most searched or first row, list the variants beside it): 50 rows can be about 15 groups, and
+summing the rows counts the same searches several times. This is de-duplication of one demand, not topic
+clustering (step 3 still applies). Difficulty: `seocli:check_keyword_difficulty` 0 in Italy is frequent
+and does not mean "easy" (46 of 52 fishing keywords in a real test); never rank or recommend on it alone.
 
 Volume is not traffic. Always attach location and language. Do not drop a low-volume commercial
 keyword on volume alone. Branded demand is not an SEO growth target.
