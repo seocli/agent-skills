@@ -21,12 +21,12 @@
     "inspect_indexing",
     "get_analytics_data",
     "research_keywords",
-    "check_keyword_difficulty"
+    "check_keyword_difficulty",
+    "find_competitors",
+    "compare_competitor"
   ],
   "planned": {
     "select_keywords": "E5.2",
-    "find_competitors": "E5.3",
-    "compare_competitor": "E5.3",
     "crawl_site": "E6.1",
     "get_audit_issues": "E6.3",
     "check_performance": "E6.5",
