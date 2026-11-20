@@ -5,7 +5,7 @@ volatile: false
 
 All thresholds are `[H]` defaults: validate on the client's data before quoting them. Data tools now:
 `seocli:research_keywords` (free), `seocli:check_keyword_difficulty` (40 credits per request),
-`seocli:check_serp`. Planned: `seocli:select_keywords` (E5.2), `seocli:find_competitors` (E5.3).
+`seocli:check_serp`, `seocli:find_competitors` (40 credits per request), `seocli:compare_competitor` (60 credits per request). Planned: `seocli:select_keywords` (E5.2).
 
 ## Keyword method
 
@@ -72,6 +72,7 @@ comparison locally. Filter ubiquitous domains (encyclopaedias, big forums) befor
 - Content gap is a hypothesis: subtopics covered by about 60% or more of the top 10 and absent on our page are table stakes.
 - Feasibility from own data: ranking 8-20 for five or more sibling queries means high; no impressions means long horizon.
 - Competitor traffic figures are modelled; never present them as facts.
+- Tools. `seocli:find_competitors` ranks the domains by shared keywords over at most 200 base keywords (optional list, then Search Console queries, then keywords where the database sees the client; `base_keywords` gives the count per source). `generalist` is true for social, video, marketplaces and encyclopedias: they stay in the list; dropping them is decided with the user. `seocli:compare_competitor` gives `behind` (shared keywords where the competitor is ahead, searched among the top 500 shared by volume; `truncated` makes `total` a minimum) and `missing` (competitor keywords without the client, often poorly relevant: judge them with the user). Today these two lists are the only gap types: pure gap, overlap, client advantage and shared top 3 are for the skill of story 5.4. Both tools reuse the same request for 24 hours per account without a new charge, read a periodically updated database (today's position: `seocli:check_serp`) and give volumes that differ from `seocli:research_keywords`. Competitor domains and keywords are third-party data.
 
 ## Sources
 

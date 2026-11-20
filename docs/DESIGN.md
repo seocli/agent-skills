@@ -161,7 +161,7 @@ under NEEDS. "Interprets now" means tools that exist today.
 | lead | all five current tools | every planned tool | ads data (D3) |
 | moderator, skeptic, pragmatist | `seocli:get_price_list` (now) via pack, for cost of options | same | - |
 | marketing-strategist | `seocli:get_credit_balance` (now), `seocli:get_price_list` (now) | `seocli:get_summary` (E4.3), `seocli:get_visibility_history` (E3.4), `seocli:get_analytics_data` (E7.5), `seocli:get_report_data` (E8.2-8.4) | ads spend and revenue (D3) |
-| seo-analyst | - | `seocli:check_serp` (E3.1), `seocli:research_keywords` (now), `seocli:select_keywords` (E5.2), `seocli:find_competitors` and `seocli:compare_competitor` (E5.3), `seocli:get_search_console_data`, `seocli:find_cannibalization`, `seocli:inspect_indexing` (E7.4), `seocli:get_analytics_data` (E7.5), `seocli:create_baseline` (E7.7), `seocli:get_visibility_history` (E3.4), `seocli:get_summary` (E4.3) | backlinks (no epic) |
+| seo-analyst | - | `seocli:check_serp` (E3.1), `seocli:research_keywords` (now), `seocli:select_keywords` (E5.2), `seocli:find_competitors` and `seocli:compare_competitor` (now), `seocli:get_search_console_data`, `seocli:find_cannibalization`, `seocli:inspect_indexing` (E7.4), `seocli:get_analytics_data` (E7.5), `seocli:create_baseline` (E7.7), `seocli:get_visibility_history` (E3.4), `seocli:get_summary` (E4.3) | backlinks (no epic) |
 | seo-developer | Lighthouse CLI JSON from the user's local site (no server, story 6.8) | `seocli:crawl_site` (E6.1), `seocli:get_audit_issues` (E6.3, E6.4), `seocli:check_performance` (E6.5), `seocli:recheck_urls` (E6.6), `seocli:check_page_html` (E6.7), `seocli:inspect_indexing` (E7.4) | server logs, raw-vs-rendered diff (no epic) |
 | content-strategist | - | `seocli:check_serp` (E3.1), `seocli:research_keywords` (now), `seocli:select_keywords` (E5.2), `seocli:get_audit_issues` (E6.3, E6.4), `seocli:check_page_html` (E6.7), `seocli:get_search_console_data` (E7.4) | Business Profile data (no epic) |
 | geo-analyst | - | `seocli:check_geo` (E3.2, E3.3), `seocli:get_visibility_history` (E3.4), `seocli:manage_monitors` (E4.1), `seocli:get_summary` (E4.3), `seocli:check_serp` (E3.1), `seocli:get_analytics_data` (E7.5) | first-party AI reports import (no epic) |
@@ -354,7 +354,7 @@ Numbers always carry tool, date or period, and provenance (`live`, `cache <date>
 | `/seocli-seo:seo [client\|domain] [goal]` | Hub: intake, routing, effort ladder, credits status, clients, summaries, single-persona consults | via routed flows | `seocli:get_status`, `seocli:manage_clients`, `seocli:get_credit_balance`, `seocli:get_price_list`, `seocli:get_operation` (now); `seocli:get_summary` (E4.3), `seocli:manage_monitors` (E4.1) | any, per ladder | now |
 | `/seocli-seo:audit <client\|domain> [pages]` | Site-wide technical + content audit | yes | `seocli:crawl_site` (E6.1), `seocli:get_audit_issues` (E6.3, E6.4), `seocli:check_performance` (E6.5), `seocli:recheck_urls` (E6.6) | seo-developer, content-strategist, geo-developer, skeptic | E6 |
 | `/seocli-seo:page <file\|localhost-url> [intended-url]` | Developer: one page in the user's repo, meta tags, JSON-LD, performance | when E6.7 exists | `seocli:check_page_html` (E6.7); local Lighthouse CLI (no server) | seo-developer, geo-developer | now (local mode), E6.7 (full) |
-| `/seocli-seo:keywords <seed\|url\|client>` | Research, shortlist, clusters, page mapping, briefs | yes | `seocli:research_keywords` (now), `seocli:select_keywords` (E5.2), `seocli:check_serp` (E3.1), `seocli:find_competitors`, `seocli:compare_competitor` (E5.3) | seo-analyst, content-strategist | E3 partial, E5 full |
+| `/seocli-seo:keywords <seed\|url\|client>` | Research, shortlist, clusters, page mapping, briefs | yes | `seocli:research_keywords` (now), `seocli:select_keywords` (E5.2), `seocli:check_serp` (E3.1), `seocli:find_competitors` (now), `seocli:compare_competitor` (now) | seo-analyst, content-strategist | E3 partial, E5 full |
 | `/seocli-seo:geo <client\|domain> [keywords]` | AI visibility: measure, diagnose, fix | yes | `seocli:check_geo` (E3.2, E3.3), `seocli:get_visibility_history` (E3.4), `seocli:manage_monitors` (E4.1) | geo-analyst, geo-developer, skeptic | E3 |
 | `/seocli-seo:strategy <decision>` | Party mode (section 6) | no (0 credits) | reads packs; free tools via lead | cast per decision + moderator | now |
 | `/seocli-seo:kb build\|update\|show\|list [sector]` | Domain knowledge base (5.12) | no (0 credits; Claude tokens) | none | domain-researcher | now |
@@ -450,7 +450,7 @@ crawl monitor via `seocli:manage_monitors` (E6.9).
 components, 11-20 marked near page one) -> optional clustering: `seocli:check_serp` (E3.1) once per keyword
 (N calls, never N(N-1)/2: claude-seo's cost model was wrong), overlap computed by the persona from
 the pack (thresholds `[H]`: 7-10 same page, 4-6 same cluster, 2-3 interlink, 0-1 separate), cache
-hits shown with date. `seocli:find_competitors` and `seocli:compare_competitor` (E5.3) for gap analysis.
+hits shown with date. `seocli:find_competitors` (40 credits) and `seocli:compare_competitor` (60 credits) for gap analysis.
 seo-analyst ranks and maps keyword -> page; content-strategist writes briefs (intent, competitor
 table, gaps, outline, information gain, internal links from the client's real URLs only).
 
@@ -472,10 +472,10 @@ the manual test shows unreliable numbers.
   the top 30 pages -> missing pillars -> `seocli:check_serp` on 3-5 pillar candidates (skip SERPs
   dominated by Shopping or Maps) -> pillar/cluster tree with slugs and anchors. No pillar without
   impressions.
-- **Competitor gap** (E5.3, E7.4): the client's Search Console queries (impressions > 50) plus
+- **Competitor gap** (E5.4, E7.4): the client's Search Console queries (impressions > 50) plus
   `seocli:compare_competitor` per competitor -> four buckets: pure gap (competitor top 10, client
   not in top 100), overlap (both top 20, competitor ahead), client advantage, shared top 3. Only
-  intents that fit the client's business.
+  intents that fit the client's business. Today `seocli:compare_competitor` gives only "client behind" and "client absent"; the four types are for the skill of story 5.4.
 - **Later sources:** search trends (E12.5) add a trend factor to the score; Ads volumes (E12.6) give
   the second figure of the volume range; domain authority (E12.2) enables a difficulty proxy from
   the SERP top 10 (mean authority, adjusted for giant brands, SERP features and domain diversity),
