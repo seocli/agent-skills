@@ -50,8 +50,19 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 2. **Reliability and intent** follow `keyword-intent-serp.md` (variants merged before counting, volume as a
    range when sources differ, intent with label, confidence 0-1 and evidence, the SERP over the words);
    do not restate them here.
-3. **Off-topic.** Drop keywords that do not fit the business (site profile, KB) before scoring, and say how
-   many and why.
+3. **Off-topic.** The business's themes are a list: one theme per line (products, techniques and needs it
+   sells or serves), each with the words that name it. They live in `<workspace_dir>/<client>/keyword-themes.md`:
+   reuse the file when it exists and say so. Otherwise propose the list once (site profile, KB, the client's
+   Search Console queries), ask the user to confirm or edit it (AskUserQuestion), and save it; without a
+   filesystem show it and reuse it for the conversation. The same list gives the same choices every round.
+   The file may also have an "off" line with names that are always off (other retailers, unrelated brands).
+   Then decide each keyword in this order and drop the off-topic ones, saying how many and why:
+   1. the client already has this exact query in Search Console at position 20 or better (for a group of
+      variants, any variant): on topic;
+   2. a name on the "off" line, another retailer's or competitor's name, another sector, or a place with no
+      link to the client: off;
+   3. it contains a word of the list (whole words, punctuation such as `#` ignored): on topic; otherwise off
+      (a generic word of the sector alone, such as "fishing" for a fishing shop, names no theme).
 4. **One score.** Extra clicks come only from `references/scoring.md`. Search Console numbers come from one
    read of the last 90 final days: `to` = today minus 3 days (the tool clips it to `last_complete_date`),
    `from` = `to` minus 89 days; quote the `period` the answer returns.
@@ -99,7 +110,10 @@ list). Show the round as one line per call and a total before any paid call.
    Several starting points: one after another, reusing cached results.
 2. With Search Console: one read (`dimension` `query`, `sort` `impressions`, `limit` 1,000, rule 4). It gives
    demand, position, clicks and the client's CTR curve.
-3. Merge variants, drop off-topic (rules 2-3), label intent.
+3. The rows are the `research_keywords` results; Search Console only adds data to them (its queries
+   missing from the research belong to Near page one and Groups). Merge variants (group numbers and name:
+   `references/scoring.md`), drop off-topic (rules 2-3), label intent; without a SERP the intent comes from
+   the words only and its confidence says so.
 4. Score with `references/scoring.md` and sort as it says. The table's columns: keyword (variants beside it),
    volume or range with sources, position and impressions of the site, intent with confidence and evidence,
    demand and its source, band to target, CTR with its source, P, today's clicks, extra clicks.
@@ -130,15 +144,19 @@ list). Show the round as one line per call and a total before any paid call.
 4. Confirm the final estimate, then `seocli:compare_competitor` per chosen competitor, always `limit` 200 and
    `max_credits` 60: the limit is part of the request identity, so a different one is a new 60-credit
    comparison, and a lower one loses the pure gaps.
-5. Classify each keyword once, in this order (rest of the keywords: "not a priority", counted and not listed):
-   1. **Shared top 3:** in `behind` or `ahead` with both positions at 3 or better;
-   2. **Client advantage:** in `ahead`;
-   3. **Overlap:** in `behind` with both positions at 20 or better;
-   4. **Pure gap:** in `missing` with the competitor at 10 or better.
-6. Search Console beats the database for the client's position: a `missing` keyword that is among the client's
-   queries at position 100 or better is not missing; reclassify it with the source written.
-7. Drop off-topic and count them before listing. `truncated` true: the totals of `behind` and `ahead` are minimums,
-   say so.
+5. Drop off-topic first (rule 3) and count them. Classify only the keywords returned by the calls.
+6. Client position: Search Console beats the database in all three lists. A keyword among the client's queries
+   takes that position (rounded half up, as the bands), with the source written; a `missing` keyword found there
+   at 100 or better is no longer missing. Positions are compared rounded.
+7. Classify each remaining keyword once, in this order, using the client position of step 6 (rest: "not a
+   priority", counted and not listed):
+   1. **Shared top 3:** both positions at 3 or better;
+   2. **Client advantage:** the client is ahead of the competitor;
+   3. **Overlap:** the competitor is ahead and both positions are at 20 or better;
+   4. **Pure gap:** the client is absent from the top 100 and the competitor is at 10 or better.
+   Equal positions outside the top 3 fit no type: not a priority. List in type order (as above), then by
+   volume descending, then keyword alphabetical. `truncated` true: the totals of `behind` and `ahead` are minimums, say so. `missing` lists only its first
+   keywords by volume out of `total`: pure gaps are found among those, so write "N listed of `total`".
 8. Columns: keyword, type, competitor position, client position and its source (database or Search Console),
    volume, competitor page, competitor. Counters: off-topic dropped (reasons), not a priority, truncated.
    Done when each listed keyword has one type and each competitor's reuse or charge is stated.

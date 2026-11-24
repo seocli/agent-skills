@@ -26,6 +26,10 @@ score or the table: one number, one period.
 
 ## Inputs
 
+- **Variant group:** a row is a group of variants. Its Search Console numbers are the sum of impressions
+  and of clicks of the variants that have a row, and the position averaged weighted by impressions. Its
+  name is the variant with the most impressions; with no Search Console row, the user's seed if it is in
+  the group, otherwise the first variant in alphabetical order.
 - **Demand per month:** impressions of the query in the read divided by 3; without a row, the monthly
   volume; with two different volumes, the low end of the range. Unknown demand: the row goes last as
   "unknown", never 0 clicks.
@@ -61,7 +65,8 @@ CTR(target) is the CTR of the band whose position is the target: target 1 uses b
 1. **Client curve** (with Search Console). Recipe in
    `search-analytics/references/gsc-analyses.md`, "CTR curves": non-brand queries of the read, per band
    `1`, `2-3`, `4-6`, `7-10`, `11-20`, CTR = sum of clicks / sum of impressions, desktop and mobile
-   together. A band needs 1,000 or more impressions in the read.
+   together. Every non-brand query of the read counts, off-topic ones too: the curve measures the site.
+   A band needs 1,000 or more impressions in the read; a band under it shows "-" in the curve.
 2. **Fixed table** otherwise (no Search Console, or a band under 1,000 impressions). Every number that
    uses it is labelled "estimated" (modelled, never measured):
 
@@ -74,7 +79,8 @@ Say per row which source the CTR has: "client curve" or "estimated".
 ## Order and rounding
 
 1. Compute with all decimals, round to a whole number once at the end, half up.
-2. A negative result becomes 0 with the reason "no estimated gain" (a computed 0, not a missing one).
+2. A negative result, or one that rounds to 0, shows 0 with the reason "no estimated gain" (a computed 0,
+   not a missing one).
 3. Sort by extra clicks descending, then demand descending, then keyword alphabetical. Unknown rows last,
    in the same order.
 4. Each row shows its factors: demand and its source, current band, target, CTR and its source, P,
