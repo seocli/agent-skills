@@ -1,6 +1,6 @@
 ---
 name: seo
-description: Entry point for SEO, GEO and paid-media work with seocli. Checks which seocli tools are available, shows credits and clients, routes to the right flow or specialist and shows credit estimates before paid calls. Use when the right command is unclear, or to check the connection, balance, price list, clients or a running operation; SERP, AI-answer, Shopping and Google data checks run here; use page for one page in this repository, ads-audit for campaigns, kb for sector knowledge; decisions go to /seocli-seo:strategy. Site audit, keyword research and branded reports are not available yet.
+description: Entry point for SEO, GEO and paid-media work with seocli. Checks which seocli tools are available, shows credits and clients, routes to the right flow or specialist and shows credit estimates before paid calls. Use when the right command is unclear, or to check the connection, balance, price list, clients or a running operation; SERP, AI-answer, Shopping and Google data checks run here; use page for one page in this repository, keywords for keyword work, ads-audit for campaigns, kb for sector knowledge; decisions go to /seocli-seo:strategy. Site audit and branded reports are not available yet.
 argument-hint: "[client or domain] [goal]"
 allowed-tools: AskUserQuestion, WebFetch
 ---
@@ -85,7 +85,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 | connection, account, balance, prices, clients, operation status | do it here | - |
 | a site-wide audit | not available yet (`/seocli-seo:audit`, needs the crawl tools) | after the audit milestone |
 | one page in this repository | local review of files you point at (`/seocli-seo:page`), no credits | server HTML check (`seocli:check_page_html` (E6.7)) |
-| keyword ideas, volumes, trend | `seocli:research_keywords` (free; from keywords, a URL or a domain; with a client it adds position and impressions from Search Console); difficulty of 1-200 keywords with `seocli:check_keyword_difficulty` (40 credits per request, estimate first) | shortlist `seocli:select_keywords` (E5.2); briefs and clusters: `/seocli-seo:keywords` not available yet |
+| keyword ideas, volumes, trend | `seocli:research_keywords` (free; from keywords, a URL or a domain; with a client it adds position and impressions from Search Console); difficulty of 1-200 keywords with `seocli:check_keyword_difficulty` (40 credits per request, estimate first); shortlist, queries close to page one, competitor gaps and topic groups: `/seocli-seo:keywords` | briefs: `content-quality` |
 | SERP positions for 1-10 keywords | `seocli:check_serp` (paid, estimate first: rules below) | cache and history reads in later releases |
 | how positions and AI citations changed for a client | `seocli:get_visibility_history` (free), drawn as charts | scheduled checks: `seocli:manage_monitors` |
 | delete my account and data (GDPR) | no tool: the user requests it in the seocli dashboard, page Account, section «Zona pericolosa» (writes CANCELLA, then confirms from the email within 72 hours) | — |

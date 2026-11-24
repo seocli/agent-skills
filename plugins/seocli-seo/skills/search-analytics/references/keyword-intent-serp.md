@@ -5,7 +5,7 @@ volatile: false
 
 All thresholds are `[H]` defaults: validate on the client's data before quoting them. Data tools now:
 `seocli:research_keywords` (free), `seocli:check_keyword_difficulty` (40 credits per request),
-`seocli:check_serp`, `seocli:find_competitors` (40 credits per request), `seocli:compare_competitor` (60 credits per request). Planned: `seocli:select_keywords` (E5.2).
+`seocli:check_serp`, `seocli:find_competitors` (40 credits per request), `seocli:compare_competitor` (60 credits per request). The shortlist, near-page-one, gaps and groups flows are `/seocli-seo:keywords`.
 
 ## Keyword method
 

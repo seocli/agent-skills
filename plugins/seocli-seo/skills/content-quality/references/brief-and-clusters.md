@@ -4,7 +4,7 @@ volatile: false
 # Content briefs and topic clusters
 
 All `[H]` defaults. Data: `seocli:check_serp`, `seocli:research_keywords`,
-`seocli:check_keyword_difficulty`, `seocli:select_keywords` (E5.2); without them, ask the user for SERP exports.
+`seocli:check_keyword_difficulty`; topic groups come from the "Groups" flow of `/seocli-seo:keywords`; without data, ask the user for SERP exports.
 
 ## Brief template
 

@@ -1,5 +1,5 @@
 {
-  "server": "seocli-api v0.23.0",
+  "server": "seocli-api v0.29.0",
   "available": [
     "get_status",
     "manage_clients",
@@ -26,7 +26,6 @@
     "compare_competitor"
   ],
   "planned": {
-    "select_keywords": "E5.2",
     "crawl_site": "E6.1",
     "get_audit_issues": "E6.3",
     "check_performance": "E6.5",
@@ -41,7 +40,6 @@
   },
   "planned_commands": [
     "audit",
-    "keywords",
     "geo",
     "report"
   ]

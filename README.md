@@ -37,14 +37,14 @@ plugin uses a local server on port 8080. The production address will become the 
 | `/seocli-seo:page <file or localhost-url>` | Developer review of one page in your repository (meta tags, headings, canonical, robots, JSON-LD, links, rendering); patches applied only after approval; no credits |
 | `/seocli-seo:strategy "<decision>"` | Strategy round-table: specialists argue one decision from the same evidence pack and a moderator drafts a falsifiable decision record for you to accept; started only by you; no credits |
 | `/seocli-seo:ads-audit <google or merchant or meta>` | Paid-campaign audit as a checklist with targeted questions; judges only the answers you give (no account data yet) |
+| `/seocli-seo:keywords <seed, url, domain or client>` | Keyword shortlist with one extra-clicks score, queries close to page one, competitor gaps, topic groups; difficulty, competitor and SERP calls cost credits (estimate first) |
 | `/seocli-seo:kb build or update or show or list [sector]` | Sector knowledge base (below); no credits |
 
 Knowledge skills, loaded by the lead and the personas (not commands): `methodology`, `seocli-tools`,
 `site-profile`, `domain-kb`, `technical-seo`, `search-analytics`, `content-quality`, `local-seo`,
 `geo-visibility`, `google-ads`, `meta-ads`, `marketing-strategy`.
 
-Not available yet: a site-wide audit (`/seocli-seo:audit`, needs the crawl tools), keyword research
-(`/seocli-seo:keywords`), a dedicated AI-visibility flow (`/seocli-seo:geo`; today the lead runs the
+Not available yet: a site-wide audit (`/seocli-seo:audit`, needs the crawl tools), a dedicated AI-visibility flow (`/seocli-seo:geo`; today the lead runs the
 AI-answer checks), branded reports (`/seocli-seo:report`) and the server-side HTML check of a page.
 
 ## Specialists

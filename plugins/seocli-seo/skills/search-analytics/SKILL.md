@@ -15,7 +15,7 @@ format, `seocli-tools` for how to fetch data and what it costs, `technical-seo` 
 indexing causes, `content-quality` for page-level quality and page-type fit, `geo-visibility` for AI
 answers. Data tools available now: `seocli:get_search_console_data`, `seocli:find_cannibalization`,
 `seocli:inspect_indexing`, `seocli:get_analytics_data`, `seocli:check_serp`, `seocli:research_keywords`,
-`seocli:check_keyword_difficulty`. Planned: `seocli:select_keywords` (E5.2). Never promise one that the live tool
+`seocli:check_keyword_difficulty`. Never promise a tool that the live tool
 list does not contain.
 
 ## Rules
@@ -74,8 +74,8 @@ Defaults the client may override; thresholds are in `references/gsc-analyses.md`
 - Analyse position at (query, page) grain over 90 days; never average CTR or position, recompute from sums `[H]`.
 - Intent: start from query words, let the SERP decide; label mixed SERPs "mixed" `[H]`.
 - Same page for two keywords when roughly 3-4 of the top 10 URLs are shared `[H]`; confirm on 20 pairs.
-- Striking distance: position 8-20, at least 100 impressions in 90 days, brand excluded `[H]`.
-- Fit CTR by position on the client's own non-brand data; published curves are sanity checks only `[H]`.
+- Striking distance: position 11-20, at least 50 impressions a month (150 in a 90-day read), brand excluded `[H]`.
+- Fit CTR by position on the client's own non-brand data; published curves are sanity checks only `[H]`. The one exception is the fixed table of `/seocli-seo:keywords`: only that formula, only without Search Console or for a band under 1,000 impressions, always labelled "estimated" (modelled, never measured).
 - Seasonality needs two full years; compare year over year, not month over month `[H]`.
 - Forecasts are ranges with a stated backtest; sizing shows positions 1, 3 and 5 `[H]`.
 - Prioritise by expected value over effort, with confidence from this site's own results `[H]`.
@@ -88,7 +88,7 @@ Defaults the client may override; thresholds are in `references/gsc-analyses.md`
 - Equating Search Console clicks with GA4 sessions.
 - Any ranking date or traffic promise; opportunity sizing from search volume times position-1 CTR.
 - A Domain Authority KPI, a vendor "difficulty" or "health" score as an outcome.
-- Treating a published CTR-by-position curve as a default for a client.
+- Treating a published CTR-by-position curve as a default for a client. The one exception is the fixed table of `/seocli-seo:keywords`: only that formula, only without Search Console or for a band under 1,000 impressions, always labelled "estimated" (modelled, never measured).
 - Calling decay or cannibalisation from one noisy window, or merging URLs that serve different intents.
 - Presenting modelled traffic (prospect sizing) as measured.
 - Using the unverified Search Console API support for the generative AI report in a promise.
