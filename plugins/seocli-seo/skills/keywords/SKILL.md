@@ -31,7 +31,7 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
 
 1. Needed everywhere: `seocli:manage_clients`, `seocli:get_price_list`. Per flow: Shortlist
    `seocli:research_keywords`, `seocli:get_search_console_data`, optionally `seocli:check_keyword_difficulty`;
-   Near page one and Groups `seocli:get_search_console_data` (Groups also `seocli:check_serp`); Gaps
+   Near page one `seocli:get_search_console_data` and `seocli:research_keywords`; Groups `seocli:get_search_console_data` and `seocli:check_serp`; Gaps
    `seocli:find_competitors`, `seocli:compare_competitor`, `seocli:get_search_console_data`.
    A tool missing from the live tool list: say it is not available on the user's seocli server yet and
    follow `seocli-tools` rule 2; never replace it with web search, memory or invented numbers.
@@ -79,7 +79,7 @@ list). Show the round as one line per call and a total before any paid call.
 | Flow | Calls | Credits |
 |---|---|---|
 | Shortlist | `research_keywords` (free, at most 2 new searches a minute), Search Console read (free); difficulty optional | 0, or 40 with difficulty |
-| Near page one | Search Console read (free) | 0 |
+| Near page one | Search Console read and `research_keywords` (both free) | 0 |
 | Gaps | `find_competitors` once, `compare_competitor` per chosen competitor | 40 + 60 x competitors |
 | Groups | Search Console reads (free), `check_serp` per pillar candidate | 30 x 3-5 pillars = 90-150 |
 
@@ -109,7 +109,8 @@ list). Show the round as one line per call and a total before any paid call.
 1. `seocli:research_keywords` (with `client_id` when there is one; `limit` as needed, default 50, max 200).
    Several starting points: one after another, reusing cached results.
 2. With Search Console: one read (`dimension` `query`, `sort` `impressions`, `limit` 1,000, rule 4). It gives
-   demand, position, clicks and the client's CTR curve.
+   position, impressions, clicks and the client's CTR curve. `omitted` above 0: a group with no row is not
+   proved absent; `references/scoring.md` ("One Search Console read") says what to use.
 3. The rows are the `research_keywords` results; Search Console only adds data to them (its queries
    missing from the research belong to Near page one and Groups). Merge variants (group numbers and name:
    `references/scoring.md`), drop off-topic (rules 2-3), label intent; without a SERP the intent comes from
@@ -126,13 +127,18 @@ list). Show the round as one line per call and a total before any paid call.
 
 1. One read: `dimension` `query_page`, `sort` `impressions`, `limit` 1,000, rule 4. The selection rule
    (positions, minimum impressions, brand) is `gsc-analyses.md`, "Striking distance"; apply it, do not copy it.
-2. Columns: query, page, average position, impressions, CTR, extra clicks (`references/scoring.md`).
+2. Columns: query, page, average position, impressions, CTR, extra clicks (`references/scoring.md`; every row
+   is band `11-20`, so demand is the monthly volume). After the selection, one free
+   `seocli:research_keywords` call (with `client_id`) with the first 20 selected queries by impressions as
+   seeds. A selected query found among the returned ideas takes its volume; the others use impressions
+   divided by 3, labelled "minimum". `omitted` above 0 and the smallest row of the read has more
+   impressions than the threshold: the list may be incomplete, say so.
 3. For the top three: one concrete action on the page that ranks, tied to the query (content, title and
    meta, internal links).
 4. Nothing above the threshold: say so and ask (AskUserQuestion) a lower threshold or a longer period.
    Fewer than 20 rows above it: say so; lower the threshold only if the user agrees. `source_truncated`
    (more than 25,000 rows): the sample is partial, say so.
-5. Cost 0. Done when every row shows a real position from Search Console and three rows have an action.
+5. Cost 0 (Search Console read and keyword research). Done when every row shows a real position from Search Console and three rows have an action.
 
 ### Gaps
 

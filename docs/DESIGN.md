@@ -455,7 +455,8 @@ the skeptic grades results of more than one persona.
   off-topic dropped, intent with confidence, one score. The formula, bands, P, CTR source and the worked example
   are only in `skills/keywords/references/scoring.md`; other files link to it.
 - **Near page one:** Search Console `query_page` rows at positions 11-20 with at least 50 impressions a month
-  (150 in the 90-day read), brand excluded, rule in `gsc-analyses.md`; a concrete action for the top three. 0 credits.
+  (150 in the 90-day read), brand excluded, rule in `gsc-analyses.md`; volume from one free `seocli:research_keywords`
+  call; a concrete action for the top three. 0 credits.
 - **Gaps:** `seocli:find_competitors` (limit 10), the user picks competitors (generalists flagged), then
   `seocli:compare_competitor` (limit 200) per competitor: 40 + 60 x N credits. `behind`, `ahead` and `missing`
   give four types in this order: shared top 3, client advantage, overlap (both top 20, competitor ahead), pure gap
