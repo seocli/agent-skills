@@ -21,30 +21,31 @@ steps below. Difficulty is not in the formula (see the end).
 
 Position, impressions, clicks and the CTR curve all come from ONE `seocli:get_search_console_data`
 read of the last 90 final days: `from` and `to` explicit, `dimension` `query`, `sort` `impressions`,
-`limit` 1,000. The 28-day Search Console columns of `seocli:research_keywords` never enter the
-score or the table: one number, one period. One exception, only for a variant group the read does not
-have, when `omitted` is above 0 (the read returns at most 1,000 rows; `omitted` counts the rows not
-returned, so a query with no row is not proved absent): see "Current band". With `omitted` 0, no row is
-absent. The report says how many queries the read covers (`rows` plus `omitted`).
+`limit` 1,000. The 28-day Search Console columns of `seocli:research_keywords` (`site`) never enter the
+score, the band or the name of a group: one number, one period. They are only shown, for a variant
+group the read does not have, when `omitted` is above 0 (the read returns at most 1,000 rows; `omitted`
+counts the rows not returned, so a query with no row is not proved absent): see "Current band". With
+`omitted` 0, no row is absent. The report says how many queries the read covers (`rows` plus `omitted`).
 
 ## Inputs
 
 - **Variant group:** a row is a group of variants. Its Search Console numbers are the sum of impressions
   and of clicks of the variants that have a row, and the position averaged weighted by impressions. Its
-  name is the variant with the most impressions; with no Search Console row, the user's seed if it is in
-  the group, otherwise the first variant in alphabetical order.
+  name is the variant with the most impressions in the read. On a tie, or with no row in the read: the
+  user's seed if it is among them, otherwise the first of them in alphabetical order.
 - **Demand per month:** by current band. Bands `1` to `7-10` (page one): impressions in the read
-  divided by 3, or the `site` impressions of 28 days as they are (see "Current band"). Bands `11-20`,
-  `21-100`, `absent`, `unknown`: the monthly volume, the low end of the range when two volumes differ.
-  Those bands with no volume: the impressions as above, labelled "minimum". Neither: demand unknown, the
-  row goes last as "unknown", never 0 clicks.
+  divided by 3. Bands `11-20`, `21-100`, `absent`, `unknown`: the monthly volume, the low end of the range
+  when two volumes differ. Those bands with no volume: the impressions in the read divided by 3, labelled
+  "minimum". Neither: demand unknown, the row goes last as "unknown", never 0 clicks.
 - **Current band** (average position rounded, half up): `1`, `2-3`, `4-6`, `7-10`, `11-20`, `21-100`,
   `absent` (not in the first 100: no Search Console row, or in a `missing` list), `unknown` (no data).
   A group with no row in the read, `omitted` above 0:
-  1. some variant has `site` in `seocli:research_keywords`: position = mean of the `site` positions
-     weighted by impressions, impressions = their sum, source "Search Console 28 days". These impressions
-     count as the month (no conversion). Today's clicks are not there: unknown, the calculation uses 0 and
-     the result is labelled "maximum, today's clicks unknown".
+  1. some variant has `site` in `seocli:research_keywords`: `absent` for the calculation (target, P,
+     demand). The table shows the `site` position (mean weighted by impressions) and impressions with the
+     source "Search Console 28 days, occasional": a query missing from the read has fewer impressions than
+     its smallest row, and such positions come from a few searches (Shopping listings, single queries),
+     not from the regular results. Today's clicks are not there: unknown, the calculation uses 0 and the
+     result is labelled "maximum, today's clicks unknown".
   2. no variant has `site`, `search_console.status` is `ok` and `search_console.truncated` is not true:
      `absent`, today's clicks 0 measured.
   3. otherwise (status not `ok`, or `truncated` true): `unknown`.
@@ -121,6 +122,9 @@ and `absent`):
 Use it as the check of a by-hand calculation: the six results are 39, 30, 45, 20, 6, 5.
 
 Demand check: band 11-20, 150 impressions in the read, volume 2,400: demand 2,400 (volume), not 50.
+
+Occasional check: no row in the read, `site` position 2 with 1 impression, volume 2,400: band `absent`,
+(2,400 x 0.03 - 0) x 0.15 = 11, labelled "maximum"; the table shows position 2 as occasional.
 
 ## Difficulty and later sources
 

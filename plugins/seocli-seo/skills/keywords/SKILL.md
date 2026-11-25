@@ -57,8 +57,8 @@ is added automatically). Only you ask; personas return QUESTIONS and you convert
    filesystem show it and reuse it for the conversation. The same list gives the same choices every round.
    The file may also have an "off" line with names that are always off (other retailers, unrelated brands).
    Then decide each keyword in this order and drop the off-topic ones, saying how many and why:
-   1. the client already has this exact query in Search Console at position 20 or better (for a group of
-      variants, any variant): on topic;
+   1. the client already has this exact query in the Search Console read at position 20 or better (for a
+      group of variants, any variant; the 28-day `site` columns do not count): on topic;
    2. a name on the "off" line, another retailer's or competitor's name, another sector, or a place with no
       link to the client: off;
    3. it contains a word of the list (whole words, punctuation such as `#` ignored): on topic; otherwise off
