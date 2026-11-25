@@ -1,4 +1,4 @@
-last_verified: 2026-11-24
+last_verified: 2026-11-25
 volatile: false
 
 # Shortlist score
@@ -22,7 +22,10 @@ steps below. Difficulty is not in the formula (see the end).
 Position, impressions, clicks and the CTR curve all come from ONE `seocli:get_search_console_data`
 read of the last 90 final days: `from` and `to` explicit, `dimension` `query`, `sort` `impressions`,
 `limit` 1,000. The 28-day Search Console columns of `seocli:research_keywords` never enter the
-score or the table: one number, one period.
+score or the table: one number, one period. One exception, only for a variant group the read does not
+have, when `omitted` is above 0 (the read returns at most 1,000 rows; `omitted` counts the rows not
+returned, so a query with no row is not proved absent): see "Current band". With `omitted` 0, no row is
+absent. The report says how many queries the read covers (`rows` plus `omitted`).
 
 ## Inputs
 
@@ -30,14 +33,24 @@ score or the table: one number, one period.
   and of clicks of the variants that have a row, and the position averaged weighted by impressions. Its
   name is the variant with the most impressions; with no Search Console row, the user's seed if it is in
   the group, otherwise the first variant in alphabetical order.
-- **Demand per month:** impressions of the query in the read divided by 3; without a row, the monthly
-  volume; with two different volumes, the low end of the range. Unknown demand: the row goes last as
-  "unknown", never 0 clicks.
+- **Demand per month:** by current band. Bands `1` to `7-10` (page one): impressions in the read
+  divided by 3, or the `site` impressions of 28 days as they are (see "Current band"). Bands `11-20`,
+  `21-100`, `absent`, `unknown`: the monthly volume, the low end of the range when two volumes differ.
+  Those bands with no volume: the impressions as above, labelled "minimum". Neither: demand unknown, the
+  row goes last as "unknown", never 0 clicks.
 - **Current band** (average position rounded, half up): `1`, `2-3`, `4-6`, `7-10`, `11-20`, `21-100`,
   `absent` (not in the first 100: no Search Console row, or in a `missing` list), `unknown` (no data).
+  A group with no row in the read, `omitted` above 0:
+  1. some variant has `site` in `seocli:research_keywords`: position = mean of the `site` positions
+     weighted by impressions, impressions = their sum, source "Search Console 28 days". These impressions
+     count as the month (no conversion). Today's clicks are not there: unknown, the calculation uses 0 and
+     the result is labelled "maximum, today's clicks unknown".
+  2. no variant has `site`, `search_console.status` is `ok` and `search_console.truncated` is not true:
+     `absent`, today's clicks 0 measured.
+  3. otherwise (status not `ok`, or `truncated` true): `unknown`.
 - **Today's clicks per month:** clicks of the query in the read divided by 3. Search Console associated
-  and no row for the query: 0 (a measured zero). No Search Console: unknown; the number is then a
-  ceiling, labelled "maximum, today's clicks unknown".
+  and no row for the query (`omitted` 0, or case 2 above): 0 (a measured zero). No Search Console:
+  unknown; the number is then a ceiling, labelled "maximum, today's clicks unknown".
 - **Brand query:** contains the domain label without separators (`etruriafishing`), its words in
   sequence (`etruria fishing`) or a brand term the user gave. Fixed rule, so the curve is the same every
   round. Brand queries stay out of the curve.
@@ -74,6 +87,11 @@ CTR(target) is the CTR of the band whose position is the target: target 1 uses b
    |---|---|---|---|---|---|
    | CTR | 0.25 | 0.12 | 0.06 | 0.03 | 0.01 |
 
+3. **Inversion check** on the curve of step 1 once the table fills its empty bands: CTR(1) >= CTR(2-3) >=
+   CTR(4-6) >= CTR(7-10) >= CTR(11-20). If a band has a lower CTR than a worse band, the whole curve is the
+   fixed table, every CTR labelled "estimated", and the report says "client curve inverted" with the
+   measured CTR per band.
+
 Say per row which source the CTR has: "client curve" or "estimated".
 
 ## Order and rounding
@@ -101,6 +119,8 @@ and `absent`):
 | absent to 10 | (1,000 x 0.03 - 0) x 0.15 | 5 (4.5 rounded up) |
 
 Use it as the check of a by-hand calculation: the six results are 39, 30, 45, 20, 6, 5.
+
+Demand check: band 11-20, 150 impressions in the read, volume 2,400: demand 2,400 (volume), not 50.
 
 ## Difficulty and later sources
 
