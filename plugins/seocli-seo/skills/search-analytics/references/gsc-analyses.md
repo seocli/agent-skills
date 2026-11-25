@@ -11,8 +11,8 @@ from `seocli:find_cannibalization` (free, same read and cache as `query_page`; s
 
 ## Striking distance
 
-(query, page) rows over the last 90 days, position 8-20, impressions at or above 100 (30 for small
-sites), brand removed, best page still the right intent. Estimated gain = impressions x (CTR at target
+(query, page) rows over the last 90 days, position 11-20, impressions at or above 50 a month (150 in the
+90-day read), brand removed, best page still the right intent. In `/seocli-seo:keywords` the gain is the score of `keywords/references/scoring.md`. Estimated gain = impressions x (CTR at target
 position - actual CTR), target position 3 and 5 as conservative and optimistic scenarios. Diagnose why
 it is stuck: intent mismatch, thin content vs the top results, title and snippet, weak internal links,
 weak external links, features above. If daily position has a standard deviation above 8, the query is
@@ -29,7 +29,7 @@ Build from the client's own data: per rounded position bucket, CTR = sum clicks 
 non-brand queries, desktop and mobile separately. Require 1,000 or more impressions per bucket or merge
 buckets; interval = CTR +/- 1.96 x sqrt(CTR(1-CTR)/impressions). Brand inflates position-1 CTR, so
 exclude it. Refit every quarter. Published industry curves are dataset-specific and shift with AI
-answers: sanity check only, never a default for a client (DESIGN 9.3: no primary source; `[H]`).
+answers: sanity check only, never a default for a client (DESIGN 9.3: no primary source; `[H]`). The one exception is the fixed table of `/seocli-seo:keywords`: only that formula, only without Search Console or for a band under 1,000 impressions, always labelled "estimated" (modelled, never measured).
 Bucketing by an averaged position blurs the curve; prefer exact ranks from `seocli:check_serp` when available.
 
 ## Cannibalisation

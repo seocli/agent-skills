@@ -17,7 +17,7 @@ intervals. Report 80% intervals. Exclude anomaly weeks (migration, outage, updat
 Per keyword or page group: incremental clicks = impressions x CTR(target position) - current clicks,
 times the probability of reaching the target (from this site's own hit rate; priors 0.3-0.5 for a
 refresh in striking distance, 0.1-0.25 for a new page on a competitive term). Subtract clicks of URLs
-replaced; apply the feature correction. Time to effect, as assumptions only: refresh 4-12 weeks to a
+replaced; apply the feature correction. The fixed instance used by `/seocli-seo:keywords` (bands, P, CTR source, rounding) is `keywords/references/scoring.md`. Time to effect, as assumptions only: refresh 4-12 weeks to a
 first signal; new pages days to index, 3-6 months or more to mature; technical fixes weeks after
 recrawl; links months. Never promise a date.
 
