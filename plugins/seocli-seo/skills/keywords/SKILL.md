@@ -81,17 +81,16 @@ list). Show the round as one line per call and a total before any paid call.
 | Shortlist | `research_keywords` (free, at most 2 new searches a minute), Search Console read (free); difficulty optional | 0, or 40 with difficulty |
 | Near page one | Search Console read and `research_keywords` (both free) | 0 |
 | Gaps | `find_competitors` once, `compare_competitor` per chosen competitor | 40 + 60 x competitors |
-| Groups | Search Console reads (free), `check_serp` per pillar candidate | 30 x 3-5 pillars = 90-150 |
+| Groups | Search Console reads (free), `check_serp` on 2 keywords per pillar candidate | 60 x 3-5 pillars = 180-300 |
 
-- Full round example: 40 (difficulty) + 40 (competitors) + 2 x 60 (comparisons) + 5 x 30 (SERPs) = 350,
-  under the default `confirm_above_credits` (500).
+- Full round example: 40 (difficulty) + 40 (competitors) + 2 x 60 (comparisons) + 5 x 60 (SERPs) = 500, equal to the default `confirm_above_credits` (500): no question, it is asked only above it.
 - Ask for an explicit yes with AskUserQuestion only above `confirm_above_credits` or when a server estimate
   differs from the plan ("Run, estimate N credits (Recommended)" / "Reduce scope" / "Cancel"). Pass
   `max_credits` equal to the estimate on every paid call; never retry on your own (`seocli-tools` rules 4-5).
 - Balance below the estimate: show both, offer a smaller round (fewer comparisons or SERPs), call nothing.
   Declined: no paid call.
-- After the calls: the real charge per call (`cost.charged`) and what was reused (`read_at`, `origin`:
-  competitors and comparisons within 24 hours, cached SERPs).
+- Estimate every `check_serp` keyword at the full 30: the shared cache reuses a SERP only when that read covered 10 pages or found the client's site, so a reuse is known after the call, never promised before.
+- After the calls: the real charge per call (`cost.charged`; a SERP is 3 per page read, `pages_read`) and what was reused (`read_at`, `origin`: competitors and comparisons within 24 hours, SERPs with `origin` `cache`).
 
 ## Steps
 
@@ -173,14 +172,13 @@ list). Show the round as one line per call and a total before any paid call.
    `impressions`, 90 days as rule 4) and keep those above 100 impressions.
 2. Group by theme; `content-strategist` proposes groups and slugs. A pillar needs impressions: none without.
 3. Client page per group: a `query_page` read of the same period; no page ranks yet: propose a slug.
-4. Estimate `seocli:check_serp` (30 credits per pillar, 3-5 pillars) and show it before calling (Cost).
-5. Confirm with the SERP: the top 10 addresses are the client's `url` plus `competitors[].url`; two keywords share
-   a group by the overlap thresholds of `keyword-intent-serp.md`, never by similar words.
+4. Two keywords per pillar candidate (3-5 pillars): the pillar and the other keyword of its group with the most impressions. Estimate `seocli:check_serp` on them (60 credits per pillar) and show it before calling (Cost).
+5. Confirm with the SERP: the top 10 addresses are the client's `url` plus `competitors[].url`; the two keywords of a pillar share the group by the overlap thresholds of `keyword-intent-serp.md`, never by similar words. Below the thresholds the second keyword leaves the group, say so; the other keywords of a confirmed group are listed as "proposed, not checked".
 6. A SERP with `features` containing `shopping` or `local_pack` is dominated: drop the pillar or make it a product or
    local page, and say which.
 7. Columns: pillar (with impressions), keywords of the group, shared addresses in the top 10, client page or
-   proposed slug, dominated SERP (yes or no, with the feature). Done when no pillar lacks impressions and each
-   confirmed group has at least 2 shared addresses.
+   proposed slug, dominated SERP (yes or no, with the feature). Done when no pillar lacks impressions, each
+   confirmed group has at least 2 shared addresses and each pillar is labelled confirmed or not.
 
 ## Errors
 
@@ -194,5 +192,7 @@ A persona returning QUESTIONS: convert them to AskUserQuestion.
 
 - Answer first; tables as above; findings and recommendations in the `methodology` contract (four fields).
 - Extra clicks are modelled, never measured; rows on the fixed table say "estimated".
+- A `check_serp` result with `ranked` false says "not in the first N results read", N from that read (`pages_read` x 10), never "outside the top 100": the provider can return fewer than 10 pages.
+- The SERP is national (the country, no city): when Search Console puts the client on page one for that keyword, Search Console's position wins; show both and say why they differ.
 - Credits: estimate, real charge per call, reuse. NOT ASSESSED: what no tool measured (trend, authority).
 - Reply in the user's language.

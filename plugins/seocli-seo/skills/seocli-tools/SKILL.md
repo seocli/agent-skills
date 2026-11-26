@@ -69,7 +69,8 @@ results into findings and recommendations.
 - Check price and balance together at session start: `seocli:get_credit_balance` and
   `seocli:get_price_list` are both free. `[H]`
 - SERP data can come from the shared 24 h cache: always show `collected_at` and say "cached" when
-  `origin` is `cache`. Offer `refresh` (full price, estimate first) only when the user needs data
+  `origin` is `cache`. The cache reuses a SERP only when that read covered 10 pages or found the client's
+  site, so estimate at full price and report the reuse after the call. Offer `refresh` (full price, estimate first) only when the user needs data
   fresher than the cached date. `[H]`
 - Report what was charged (`cost.charged`) and why (pages read); the estimate is only the maximum
   reserved before the call, so never present the difference as a saving or a discount. `[H]`
