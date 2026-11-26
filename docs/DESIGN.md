@@ -462,7 +462,7 @@ the skeptic grades results of more than one persona.
   give four types in this order: shared top 3, client advantage, overlap (both top 20, competitor ahead), pure gap
   (competitor top 10, client not in top 100). Search Console wins over the database for the client's position.
 - **Groups:** top 200 queries with impressions above 100, grouped by theme, no pillar without impressions;
-  `seocli:check_serp` on 3-5 pillar candidates (30 credits each); a group needs shared top-10 addresses; SERPs
+  `seocli:check_serp` on two keywords of each of 3-5 pillar candidates (60 credits each); a group needs shared top-10 addresses; SERPs
   dominated by Shopping or local packs are dropped or become product or local pages.
 - **Reliability rules** (from `search-analytics/references/keyword-intent-serp.md`): every figure carries its source;
   volume is a range when sources disagree; a missing figure is unknown, never 0; the SERP beats query wording for
