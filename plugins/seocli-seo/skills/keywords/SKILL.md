@@ -117,7 +117,7 @@ list). Show the round as one line per call and a total before any paid call.
 4. Score with `references/scoring.md` and sort as it says. The table's columns: keyword (variants beside it),
    volume or range with sources, position and impressions of the site, intent with confidence and evidence,
    demand and its source, band to target, CTR with its source, P, today's clicks, extra clicks.
-5. Difficulty is optional: estimate 40 credits first, add it as a context column; say that 0 does not mean easy.
+5. Difficulty is optional: estimate 40 credits first, add it as a context column (labels in `references/scoring.md`).
 6. `seo-analyst` over the pack checks intent and maps keyword to page. Done when every row shows its factors
    with their sources and the order is the one `references/scoring.md` gives (so the same data always gives
    the same first 10 rows).

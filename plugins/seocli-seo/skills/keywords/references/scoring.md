@@ -128,7 +128,9 @@ Occasional check: no row in the read, `site` position 2 with 1 impression, volum
 
 ## Difficulty and later sources
 
-- `seocli:check_keyword_difficulty` is a context column, never a factor. In Italy 0 or `null` is
-  frequent and does not mean "easy".
+- `seocli:check_keyword_difficulty` is a context column, never a factor, and is paid even when every value comes
+  back 0 or `null`. Show 0 as «sotto soglia» (below the source threshold of links in the top 10, never "easy") and
+  `null` as «nessun dato dalla fonte» (the source has no data on the keyword), the labels the dashboard uses
+  (in English «below threshold» and «no data from the source»).
 - Described, not used: a trend factor on demand (E12.5), Ads volumes as the second figure of the volume
   range (E12.6), a difficulty estimated from the SERP (E12.2, always labelled an estimate).
