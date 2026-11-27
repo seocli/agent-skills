@@ -6,7 +6,7 @@
     {
       "name": "seocli-seo",
       "source": "./plugins/seocli-seo",
-      "version": "0.4.3",
+      "version": "0.4.4",
       "category": "seo",
       "description": "SEO, GEO and paid-media specialist personas, a strategy round-table and the seocli MCP server."
     }
